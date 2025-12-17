@@ -16,8 +16,11 @@ import {
     Play
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useDarkMode } from './contexts/DarkModeContext';
+import { apiService } from './services/apiService';
 
 const ProfilePage = () => {
+    const { darkMode, toggleDarkMode } = useDarkMode();
     const [history, setHistory] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -27,8 +30,7 @@ const ProfilePage = () => {
             try {
                 setLoading(true);
                 // Fetch for you content as history
-                const response = await fetch('https://dramabox.sansekai.my.id/api/dramabox/foryou');
-                const data = await response.json();
+                const data = await apiService.get('/api/dramabox/foryou');
 
                 // Use the first 2 items as history
                 setHistory(data.slice(0, 2));
@@ -206,7 +208,10 @@ const ProfilePage = () => {
                             />
 
                             {/* Dark Mode Toggle Item */}
-                            <div className="flex items-center justify-between p-3 sm:p-4 md:p-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group w-full cursor-pointer">
+                            <div
+                                className="flex items-center justify-between p-3 sm:p-4 md:p-5 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors group w-full cursor-pointer"
+                                onClick={toggleDarkMode}
+                            >
                                 <div className="flex items-center gap-3 sm:gap-4">
                                     <div className="bg-black dark:bg-white p-1.5 sm:p-2 rounded-lg text-white dark:text-black flex-shrink-0">
                                         <Moon size={18} sm:size={20} />
@@ -220,8 +225,8 @@ const ProfilePage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div className="relative inline-flex h-6 w-10 sm:h-7 sm:w-12 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out bg-primary ml-2">
-                                    <span className="translate-x-4 sm:translate-x-5 pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out"></span>
+                                <div className={`relative inline-flex h-6 w-10 sm:h-7 sm:w-12 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out ${darkMode ? 'bg-primary' : 'bg-gray-300'} ml-2`}>
+                                    <span className={`pointer-events-none inline-block h-5 w-5 sm:h-6 sm:w-6 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out ${darkMode ? 'translate-x-5 sm:translate-x-5' : 'translate-x-0'}`}></span>
                                 </div>
                             </div>
                         </div>

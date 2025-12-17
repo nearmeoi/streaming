@@ -7,10 +7,13 @@ import {
     useLocation
 } from "react-router-dom";
 import { Home, Search, Play, User, X } from "lucide-react";
+import { DarkModeProvider, useDarkMode } from './contexts/DarkModeContext';
+import { apiService } from './services/apiService';
 import ProfilePage from "./ProfilePage"; // Import design baru tadi
 
 // --- COMPONENTS ---
 const BottomNav = () => {
+    const { darkMode } = useDarkMode();
     const location = useLocation();
     const isActive = path =>
         location.pathname === path ? "text-primary" : "text-gray-400";
@@ -19,7 +22,7 @@ const BottomNav = () => {
     if (location.pathname === "/player") return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 h-14 sm:h-16 bg-surface-dark border-t border-gray-800 flex justify-around items-center z-50 md:hidden">
+        <div className={`fixed bottom-0 left-0 right-0 h-14 sm:h-16 bg-surface-light ${darkMode ? 'bg-surface-dark border-gray-700' : 'bg-surface-light border-gray-200'} border-t flex justify-around items-center z-50 md:hidden`}>
             <Link
                 to="/"
                 className={`flex flex-col items-center gap-0.5 sm:gap-1 ${isActive("/")}`}
@@ -60,8 +63,7 @@ const HomePage = () => {
             try {
                 setLoading(true);
                 // Fetch featured content (using 'latest' as featured)
-                const featuredResponse = await fetch('https://dramabox.sansekai.my.id/api/dramabox/latest');
-                const featuredData = await featuredResponse.json();
+                const featuredData = await apiService.get('/api/dramabox/latest');
 
                 // Set featured to the first item from latest
                 if (featuredData && featuredData.length > 0) {
@@ -69,8 +71,7 @@ const HomePage = () => {
                 }
 
                 // Fetch trending content
-                const trendingResponse = await fetch('https://dramabox.sansekai.my.id/api/dramabox/trending');
-                const trendingData = await trendingResponse.json();
+                const trendingData = await apiService.get('/api/dramabox/trending');
 
                 // Set first 4 trending items
                 setTrending(trendingData.slice(0, 4));
@@ -149,38 +150,42 @@ const HomePage = () => {
     );
 };
 
-const PlayerPage = () => (
-    <div className="h-screen w-screen bg-black flex items-center justify-center relative">
-        <Link
-            to="/"
-            className="absolute top-3 sm:top-4 left-3 sm:left-4 z-50 p-2 bg-white/20 rounded-full text-white"
-        >
-            <X size={20} sm:size={24} />
-        </Link>
-        <div className="text-white text-center">
-            <p className="mb-4">Video player would display here</p>
-            <p className="text-gray-400">In a real implementation, this would load video content from the API</p>
+const PlayerPage = () => {
+    return (
+        <div className="h-screen w-screen bg-black flex items-center justify-center relative">
+            <Link
+                to="/"
+                className="absolute top-3 sm:top-4 left-3 sm:left-4 z-50 p-2 bg-white/20 rounded-full text-white"
+            >
+                <X size={20} sm:size={24} />
+            </Link>
+            <div className="text-white text-center">
+                <p className="mb-4">Video player would display here</p>
+                <p className="text-gray-400">In a real implementation, this would load video content from the API</p>
+            </div>
         </div>
-    </div>
-);
+    );
+};
 
 // --- MAIN APP ---
 function App() {
     return (
-        <Router>
-            <div className="min-h-screen bg-background-dark text-white font-sans">
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/profile" element={<ProfilePage />} />
-                    <Route path="/player" element={<PlayerPage />} />
-                    <Route
-                        path="/search"
-                        element={<SearchPage />}
-                    />
-                </Routes>
-                <BottomNav />
-            </div>
-        </Router>
+        <DarkModeProvider>
+            <Router>
+                <div className="min-h-screen bg-background-light dark:bg-background-dark text-white font-sans">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/player" element={<PlayerPage />} />
+                        <Route
+                            path="/search"
+                            element={<SearchPage />}
+                        />
+                    </Routes>
+                    <BottomNav />
+                </div>
+            </Router>
+        </DarkModeProvider>
     );
 };
 
@@ -198,8 +203,7 @@ const SearchPage = () => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch(`https://dramabox.sansekai.my.id/api/dramabox/search?query=${encodeURIComponent(query)}`);
-            const data = await response.json();
+            const data = await apiService.get(`/api/dramabox/search?query=${encodeURIComponent(query)}`);
             setResults(data);
         } catch (err) {
             setError(err.message);

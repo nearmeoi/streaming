@@ -16,19 +16,19 @@ const BottomNav = () => {
     const { darkMode } = useDarkMode();
     const location = useLocation();
     const isActive = path =>
-        location.pathname === path ? "text-primary" : "text-gray-400";
+        location.pathname === path ? (darkMode ? "text-primary" : "text-primary") : (darkMode ? "text-gray-400" : "text-gray-500");
 
     // Sembunyikan Nav jika di halaman Player
     if (location.pathname === "/player") return null;
 
     return (
-        <div className={`fixed bottom-0 left-0 right-0 h-14 sm:h-16 bg-surface-light ${darkMode ? 'bg-surface-dark border-gray-700' : 'bg-surface-light border-gray-200'} border-t flex justify-around items-center z-50 md:hidden`}>
+        <div className={`fixed bottom-0 left-0 right-0 h-14 sm:h-16 ${darkMode ? 'bg-surface-dark border-gray-700' : 'bg-surface-light border-gray-200'} border-t flex justify-around items-center z-50 md:hidden`}>
             <Link
                 to="/"
                 className={`flex flex-col items-center gap-0.5 sm:gap-1 ${isActive("/")}`}
             >
                 <Home size={20} sm:size={24} />
-                <span className="text-[8px] sm:text-[10px]">Home</span>
+                <span className={`text-[8px] sm:text-[10px] ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Home</span>
             </Link>
             <Link
                 to="/search"
@@ -37,7 +37,7 @@ const BottomNav = () => {
                 )}`}
             >
                 <Search size={20} sm:size={24} />
-                <span className="text-[8px] sm:text-[10px]">Search</span>
+                <span className={`text-[8px] sm:text-[10px] ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Search</span>
             </Link>
             <Link
                 to="/profile"
@@ -46,15 +46,17 @@ const BottomNav = () => {
                 )}`}
             >
                 <User size={20} sm:size={24} />
-                <span className="text-[8px] sm:text-[10px]">Profile</span>
+                <span className={`text-[8px] sm:text-[10px] ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Profile</span>
             </Link>
         </div>
     );
 };
 
 const HomePage = () => {
+    const { darkMode } = useDarkMode();
     const [featured, setFeatured] = React.useState(null);
     const [trending, setTrending] = React.useState([]);
+    const [forYou, setForYou] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
@@ -62,6 +64,7 @@ const HomePage = () => {
         const fetchHomeData = async () => {
             try {
                 setLoading(true);
+
                 // Fetch featured content (using 'latest' as featured)
                 const featuredData = await apiService.get('/api/dramabox/latest');
 
@@ -71,10 +74,16 @@ const HomePage = () => {
                 }
 
                 // Fetch trending content
-                const trendingData = await apiService.get('/api/dramabox/trending');
+                const trendingResponse = await apiService.get('/api/dramabox/trending');
 
-                // Set first 4 trending items
-                setTrending(trendingData.slice(0, 4));
+                // Set trending items
+                setTrending(trendingResponse || []);
+
+                // Fetch "for you" content
+                const forYouResponse = await apiService.get('/api/dramabox/foryou');
+
+                // Set "for you" items
+                setForYou(forYouResponse || []);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -86,19 +95,19 @@ const HomePage = () => {
     }, []);
 
     if (loading) return (
-        <div className="pb-20 sm:pb-24 flex justify-center items-center h-64">
-            <div className="text-white text-lg">Loading...</div>
+        <div className={`pb-20 sm:pb-24 flex justify-center items-center h-64 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
+            <div className={darkMode ? 'text-white' : 'text-black'}>Loading...</div>
         </div>
     );
 
     if (error) return (
-        <div className="pb-20 sm:pb-24 flex justify-center items-center h-64">
+        <div className={`pb-20 sm:pb-24 flex justify-center items-center h-64 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
             <div className="text-red-500 text-lg">Error: {error}</div>
         </div>
     );
 
     return (
-        <div className="pb-20 sm:pb-24">
+        <div className={`pb-20 sm:pb-24 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
             {/* Hero */}
             {featured && (
                 <div className="relative h-[50vh] sm:h-[60vh] w-full mb-6">
@@ -128,7 +137,7 @@ const HomePage = () => {
             )}
             {/* Categories */}
             <div className="px-4">
-                <h2 className="text-white font-bold mb-3 sm:mb-4 text-lg">Trending Now</h2>
+                <h2 className={`font-bold mb-3 sm:mb-4 text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Trending Now</h2>
                 <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide">
                     {trending.map((drama, i) => (
                         <div
@@ -146,22 +155,58 @@ const HomePage = () => {
                     ))}
                 </div>
             </div>
+
+            {/* For You Section */}
+            <div className="px-4 mt-8">
+                <h2 className={`font-bold mb-3 sm:mb-4 text-lg ${darkMode ? 'text-white' : 'text-black'}`}>For You</h2>
+                <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide">
+                    {forYou.slice(0, 4).map((drama, i) => (
+                        <div
+                            key={`foryou-${drama.bookId || i}`}
+                            className="flex-shrink-0 w-24 sm:w-32 aspect-poster bg-gray-800 rounded-lg overflow-hidden min-w-[96px] sm:min-w-[128px]"
+                        >
+                            <img
+                                src={drama.coverWap || drama.cover}
+                                alt={drama.bookName}
+                                className="w-full h-full object-cover"
+                                loading="lazy"
+                                sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 128px"
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 };
 
 const PlayerPage = () => {
+    const { darkMode } = useDarkMode();
+
     return (
-        <div className="h-screen w-screen bg-black flex items-center justify-center relative">
-            <Link
-                to="/"
-                className="absolute top-3 sm:top-4 left-3 sm:left-4 z-50 p-2 bg-white/20 rounded-full text-white"
-            >
-                <X size={20} sm:size={24} />
-            </Link>
-            <div className="text-white text-center">
-                <p className="mb-4">Video player would display here</p>
-                <p className="text-gray-400">In a real implementation, this would load video content from the API</p>
+        <div className={`h-screen w-screen ${darkMode ? 'bg-black' : 'bg-gray-900'} flex flex-col`}>
+            <div className="absolute top-3 sm:top-4 left-3 sm:left-4 z-50">
+                <Link
+                    to="/"
+                    className="p-2 bg-white/20 rounded-full text-white hover:bg-white/30 transition-colors"
+                >
+                    <X size={20} sm:size={24} />
+                </Link>
+            </div>
+            <div className="flex-1 flex items-center justify-center">
+                <div className="text-center p-4">
+                    <div className="w-full max-w-4xl aspect-video bg-gray-800 rounded-lg flex items-center justify-center mb-4">
+                        <div className="text-center">
+                            <div className="inline-block p-4 bg-primary/20 rounded-full mb-4">
+                                <Play size={48} className="text-primary" />
+                            </div>
+                            <p className="text-white text-lg">Video Player</p>
+                            <p className="text-gray-400 mt-2">In a real implementation, actual video content would play here</p>
+                        </div>
+                    </div>
+                    <h2 className="text-white text-xl font-bold mt-4">Featured Content</h2>
+                    <p className="text-gray-400">This would display detailed information about the currently playing video</p>
+                </div>
             </div>
         </div>
     );
@@ -191,6 +236,7 @@ function App() {
 
 // Search Page Component
 const SearchPage = () => {
+    const { darkMode } = useDarkMode();
     const [query, setQuery] = React.useState('');
     const [results, setResults] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
@@ -213,7 +259,7 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="p-4 bg-background-dark min-h-screen">
+        <div className={`p-4 ${darkMode ? 'bg-background-dark' : 'bg-background-light'} min-h-screen`}>
             <div className="max-w-4xl mx-auto">
                 <form onSubmit={handleSearch} className="mb-6">
                     <div className="relative">
@@ -222,7 +268,7 @@ const SearchPage = () => {
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="Search for dramas..."
-                            className="w-full p-4 pr-12 rounded-xl bg-surface-dark text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-primary"
+                            className={`w-full p-4 pr-12 rounded-xl ${darkMode ? 'bg-surface-dark text-white border-gray-700' : 'bg-surface-light text-black border-gray-300'} border focus:outline-none focus:ring-2 focus:ring-primary`}
                         />
                         <button
                             type="submit"
@@ -234,25 +280,25 @@ const SearchPage = () => {
                 </form>
 
                 {error && (
-                    <div className="text-red-500 text-center py-4">
+                    <div className={`${darkMode ? 'text-red-400' : 'text-red-500'} text-center py-4`}>
                         Error: {error}
                     </div>
                 )}
 
                 {loading && (
                     <div className="text-center py-10">
-                        <div className="text-white">Searching...</div>
+                        <div className={darkMode ? 'text-white' : 'text-black'}>Searching...</div>
                     </div>
                 )}
 
                 {!loading && !error && results.length > 0 && (
                     <div>
-                        <h2 className="text-xl font-bold text-white mb-4">Search Results</h2>
+                        <h2 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-black'} mb-4`}>Search Results</h2>
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
                             {results.map((drama) => (
                                 <div
                                     key={drama.bookId}
-                                    className="bg-surface-dark rounded-lg overflow-hidden border border-gray-700 hover:border-primary transition-colors"
+                                    className={`${darkMode ? 'bg-surface-dark border-gray-700' : 'bg-surface-light border-gray-300'} rounded-lg overflow-hidden border hover:border-primary transition-colors`}
                                 >
                                     <img
                                         src={drama.cover}
@@ -261,8 +307,8 @@ const SearchPage = () => {
                                         loading="lazy"
                                     />
                                     <div className="p-2">
-                                        <h3 className="text-white text-sm font-semibold truncate">{drama.bookName}</h3>
-                                        <p className="text-gray-400 text-xs truncate">{drama.protagonist}</p>
+                                        <h3 className={`text-sm font-semibold truncate ${darkMode ? 'text-white' : 'text-black'}`}>{drama.bookName}</h3>
+                                        <p className={`text-xs truncate ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{drama.protagonist}</p>
                                     </div>
                                 </div>
                             ))}
@@ -272,7 +318,7 @@ const SearchPage = () => {
 
                 {!loading && !error && results.length === 0 && query && (
                     <div className="text-center py-10">
-                        <p className="text-gray-400">No results found for "{query}"</p>
+                        <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>No results found for "{query}"</p>
                     </div>
                 )}
             </div>

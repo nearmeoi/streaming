@@ -45,9 +45,9 @@ const ProfilePage = () => {
     }, []);
 
     return (
-        <div className="flex flex-col md:flex-row h-screen w-full font-display bg-background-light dark:bg-background-dark text-text-primary-light dark:text-white overflow-hidden">
+        <div className={`flex flex-col md:flex-row h-screen w-full font-display ${darkMode ? 'bg-background-dark text-white' : 'bg-background-light text-text-primary-light'} overflow-hidden`}>
             {/* --- SIDEBAR (Hidden on Mobile, Visible on Desktop) --- */}
-            <aside className="hidden md:flex w-64 lg:w-72 flex-col justify-between border-r border-gray-100 dark:border-gray-800 bg-white dark:bg-surface-dark p-4 lg:p-6 flex-shrink-0 z-20">
+            <aside className={`hidden md:flex w-64 lg:w-72 flex-col justify-between border-r ${darkMode ? 'border-gray-800 bg-surface-dark' : 'border-gray-200 bg-white'} p-4 lg:p-6 flex-shrink-0 z-20`}>
                 <div className="flex flex-col gap-6 lg:gap-8">
                     <div className="flex items-center gap-3 lg:gap-4 px-2">
                         <img
@@ -119,8 +119,8 @@ const ProfilePage = () => {
             </aside>
 
             {/* --- MAIN CONTENT --- */}
-            <main className="flex-1 overflow-y-auto h-full w-full bg-background-light dark:bg-background-dark pb-24 md:pb-12">
-                <div className="max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 lg:py-10 flex flex-col gap-6 sm:gap-8 lg:gap-10">
+            <main className={`flex-1 overflow-y-auto h-full w-full ${darkMode ? 'bg-background-dark' : 'bg-background-light'} pb-24 md:pb-12`}>
+                <div className={`max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 lg:py-10 flex flex-col gap-6 sm:gap-8 lg:gap-10`}>
                     {/* Header Profile */}
                     <section className="flex flex-col items-center text-center gap-5 pt-4">
                         <div className="relative group">
@@ -187,10 +187,10 @@ const ProfilePage = () => {
 
                     {/* Settings List */}
                     <section className="flex flex-col gap-4">
-                        <h3 className="text-base sm:text-lg font-bold text-black dark:text-white px-1">
+                        <h3 className={`text-base sm:text-lg font-bold ${darkMode ? 'text-white' : 'text-black'} px-1`}>
                             Settings
                         </h3>
-                        <div className="flex flex-col bg-surface-light dark:bg-surface-dark rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden divide-y divide-gray-100 dark:divide-gray-800">
+                        <div className={`flex flex-col ${darkMode ? 'bg-surface-dark border-gray-800 divide-gray-800' : 'bg-surface-light border-gray-100 divide-gray-100'} rounded-2xl border overflow-hidden divide-y`}>
                             <SettingsItem
                                 icon={Shield}
                                 title="Account Security"
@@ -235,7 +235,7 @@ const ProfilePage = () => {
                     {/* History */}
                     <section>
                         <div className="flex items-center justify-between mb-4 px-1">
-                            <h3 className="text-base sm:text-lg font-bold text-black dark:text-white flex items-center gap-2">
+                            <h3 className={`text-base sm:text-lg font-bold ${darkMode ? 'text-white' : 'text-black'} flex items-center gap-2`}>
                                 History
                             </h3>
                             <a

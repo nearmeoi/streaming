@@ -1,59 +1,54 @@
-// apiService.js - A utility to handle API requests with CORS proxy
-const CORS_PROXIES = [
-  'https://api.allorigins.win/raw?url=',
-  'https://api.codetabs.com/v1/proxy/?quest=',
-  'https://cors-anywhere.herokuapp.com/'
-];
-
+// apiService.js - A utility to handle API requests with CORS bypass
 export const apiService = {
   async get(endpoint) {
-    // First, try direct fetch (might work in some environments)
     try {
-      const response = await fetch(`https://dramabox.sansekai.my.id${endpoint}`, {
+      // Using a CORS proxy service to bypass CORS restrictions
+      // Note: This is a workaround for client-side CORS issues
+      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://dramabox.sansekai.my.id${endpoint}`)}`;
+
+      const response = await fetch(proxyUrl, {
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          // Adding common headers that might help with some servers
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
         }
       });
-      if (response.ok) {
-        return await response.json();
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // The proxy service wraps the response, so we need to extract the actual content
+      if (data && data.contents) {
+        try {
+          // Parse the JSON content returned by the proxy service
+          return JSON.parse(data.contents);
+        } catch (parseError) {
+          console.error('Error parsing proxy response:', parseError);
+          throw parseError;
+        }
+      } else {
+        // If the proxy service format is different, try to return the content directly
+        return data;
       }
     } catch (error) {
-      console.warn('Direct fetch failed:', error.message);
-    }
+      console.error('API request failed:', error.message);
 
-    // If direct fetch fails, try each CORS proxy in sequence
-    for (const proxy of CORS_PROXIES) {
-      try {
-        let proxyUrl;
-        if (proxy.includes('allorigins')) {
-          // allorigins uses different format
-          proxyUrl = `${proxy}https://dramabox.sansekai.my.id${encodeURIComponent(endpoint)}`;
-        } else {
-          proxyUrl = `${proxy}https://dramabox.sansekai.my.id${endpoint}`;
-        }
-
-        const response = await fetch(proxyUrl, {
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error(`Proxy error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-      } catch (proxyError) {
-        console.warn(`Proxy ${proxy} failed:`, proxyError.message);
-        // Continue to next proxy
-        continue;
+      // Provide fallback data structure to avoid breaking the UI
+      // This ensures the app remains functional even if the API is temporarily unavailable
+      if (endpoint.includes('/api/dramabox/latest')) {
+        return [];
+      } else if (endpoint.includes('/api/dramabox/trending')) {
+        return [];
+      } else if (endpoint.includes('/api/dramabox/foryou')) {
+        return [];
+      } else if (endpoint.includes('/api/dramabox/search')) {
+        return [];
       }
-    }
 
-    // If all methods fail, throw an error
-    throw new Error('All fetch methods failed. API may be unreachable.');
+      // If we don't have a specific fallback, return an empty array
+      return [];
+    }
   }
 };

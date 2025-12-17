@@ -56,7 +56,6 @@ const HomePage = () => {
     const { darkMode } = useDarkMode();
     const [featured, setFeatured] = React.useState(null);
     const [trending, setTrending] = React.useState([]);
-    const [forYou, setForYou] = React.useState([]);
     const [loading, setLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
 
@@ -78,12 +77,6 @@ const HomePage = () => {
 
                 // Set trending items
                 setTrending(trendingResponse || []);
-
-                // Fetch "for you" content
-                const forYouResponse = await apiService.get('/api/dramabox/foryou');
-
-                // Set "for you" items
-                setForYou(forYouResponse || []);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -135,46 +128,42 @@ const HomePage = () => {
                     </div>
                 </div>
             )}
-            {/* Categories */}
+            {/* Trending Section */}
             <div className="px-4">
                 <h2 className={`font-bold mb-3 sm:mb-4 text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Trending Now</h2>
-                <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide">
-                    {trending.map((drama, i) => (
-                        <div
-                            key={drama.bookId || i}
-                            className="flex-shrink-0 w-24 sm:w-32 aspect-poster bg-gray-800 rounded-lg overflow-hidden min-w-[96px] sm:min-w-[128px]"
-                        >
-                            <img
-                                src={drama.coverWap}
-                                alt={drama.bookName}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                                sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 128px"
-                            />
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* For You Section */}
-            <div className="px-4 mt-8">
-                <h2 className={`font-bold mb-3 sm:mb-4 text-lg ${darkMode ? 'text-white' : 'text-black'}`}>For You</h2>
-                <div className="flex gap-3 sm:gap-4 overflow-x-auto pb-4 scrollbar-hide">
-                    {forYou.slice(0, 4).map((drama, i) => (
-                        <div
-                            key={`foryou-${drama.bookId || i}`}
-                            className="flex-shrink-0 w-24 sm:w-32 aspect-poster bg-gray-800 rounded-lg overflow-hidden min-w-[96px] sm:min-w-[128px]"
-                        >
-                            <img
-                                src={drama.coverWap || drama.cover}
-                                alt={drama.bookName}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                                sizes="(max-width: 640px) 96px, (max-width: 768px) 128px, 128px"
-                            />
-                        </div>
-                    ))}
-                </div>
+                {trending.length > 0 ? (
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                        {trending.map((drama) => (
+                            <Link
+                                key={drama.bookId}
+                                to="/player"
+                                className="group"
+                            >
+                                <div className="relative aspect-poster rounded-lg overflow-hidden bg-gray-800">
+                                    <img
+                                        src={drama.coverWap}
+                                        alt={drama.bookName}
+                                        className="w-full h-full object-cover"
+                                        loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                                        <div className="opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <Play size={32} className="text-white" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <h3 className={`mt-2 text-sm font-semibold truncate ${darkMode ? 'text-white' : 'text-black'}`}>
+                                    {drama.bookName}
+                                </h3>
+                                <p className={`text-xs truncate ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                                    {drama.tags?.slice(0, 2).join(', ') || 'Drama'}
+                                </p>
+                            </Link>
+                        ))}
+                    </div>
+                ) : (
+                    <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>No trending content available</p>
+                )}
             </div>
         </div>
     );

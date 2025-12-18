@@ -1,4 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import Skeleton from './Skeleton';
+
+// Session-level cache to prevent re-loading flicker for already seen images
+const imageCache = new Set();
 
 const LazyImage = ({
     src,
@@ -7,11 +11,17 @@ const LazyImage = ({
     placeholderClassName = '',
     ...props
 }) => {
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [isInView, setIsInView] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(imageCache.has(src));
+    const [isInView, setIsInView] = useState(imageCache.has(src));
     const imgRef = useRef(null);
 
     useEffect(() => {
+        if (imageCache.has(src)) {
+            setIsInView(true);
+            setIsLoaded(true);
+            return;
+        }
+
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
@@ -20,7 +30,7 @@ const LazyImage = ({
                 }
             },
             {
-                rootMargin: '100px', // Start loading 100px before entering viewport
+                rootMargin: '200px', // Preload earlier for smoother experience
                 threshold: 0.01
             }
         );
@@ -30,14 +40,20 @@ const LazyImage = ({
         }
 
         return () => observer.disconnect();
-    }, []);
+    }, [src]);
+
+    const handleLoad = () => {
+        imageCache.add(src);
+        setIsLoaded(true);
+    };
 
     return (
-        <div ref={imgRef} className={`relative ${className}`} {...props}>
-            {/* Placeholder/Skeleton */}
+        <div ref={imgRef} className={`relative overflow-hidden ${className}`} {...props}>
+            {/* Skeleton Placeholder */}
             {!isLoaded && (
-                <div
-                    className={`absolute inset-0 bg-gray-700 animate-pulse ${placeholderClassName}`}
+                <Skeleton
+                    className={`absolute inset-0 ${placeholderClassName}`}
+                    variant="rectangle"
                 />
             )}
 
@@ -46,9 +62,9 @@ const LazyImage = ({
                 <img
                     src={src}
                     alt={alt}
-                    className={`w-full h-full object-cover transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
+                    className={`w-full h-full object-cover transition-opacity duration-500 ${isLoaded ? 'opacity-100' : 'opacity-0'
                         }`}
-                    onLoad={() => setIsLoaded(true)}
+                    onLoad={handleLoad}
                     loading="lazy"
                 />
             )}

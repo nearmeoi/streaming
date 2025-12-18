@@ -3,6 +3,22 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import { ChevronLeft, Play, Pause, ChevronDown, Volume2, VolumeX } from "lucide-react";
 import { apiService } from "../services/apiService";
 import { historyService } from "../services/historyService";
+import Skeleton from "../components/Skeleton";
+
+// Simple HLS script loader
+const loadHls = () => {
+    return new Promise((resolve) => {
+        if (window.Hls) {
+            resolve(true);
+            return;
+        }
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.head.appendChild(script);
+    });
+};
 
 const PlayerPage = () => {
     const { bookId } = useParams();
@@ -21,6 +37,7 @@ const PlayerPage = () => {
     const [showEpisodes, setShowEpisodes] = useState(false);
     const [showControls, setShowControls] = useState(true);
     const videoRef = useRef(null);
+    const hlsRef = useRef(null);
     const controlsTimeoutRef = useRef(null);
 
     // Fetch drama details and episodes list
@@ -32,7 +49,6 @@ const PlayerPage = () => {
             try {
                 const data = await apiService.get(`/api/detail/${bookId}`);
                 if (data) {
-                    // Transform to expected format
                     setDrama({
                         bookId: data.id || bookId,
                         bookName: data.title,
@@ -77,6 +93,46 @@ const PlayerPage = () => {
         fetchVideo();
     }, [bookId, currentEpisodeIndex, episodes]);
 
+    // Handle HLS and Video Source
+    useEffect(() => {
+        if (!videoUrl || !videoRef.current) return;
+
+        const video = videoRef.current;
+
+        // Clean up previous HLS instance
+        if (hlsRef.current) {
+            hlsRef.current.destroy();
+            hlsRef.current = null;
+        }
+
+        const initVideo = async () => {
+            if (videoUrl.includes('.m3u8')) {
+                const hlsSupported = await loadHls();
+                if (hlsSupported && window.Hls.isSupported()) {
+                    const hls = new window.Hls();
+                    hls.loadSource(videoUrl);
+                    hls.attachMedia(video);
+                    hlsRef.current = hls;
+                } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                    // Native HLS (Safari/iOS)
+                    video.src = videoUrl;
+                }
+            } else {
+                // Normal MP4
+                video.src = videoUrl;
+            }
+        };
+
+        initVideo();
+
+        return () => {
+            if (hlsRef.current) {
+                hlsRef.current.destroy();
+                hlsRef.current = null;
+            }
+        };
+    }, [videoUrl]);
+
     // Save to history when drama loads
     useEffect(() => {
         if (drama && bookId) {
@@ -99,7 +155,7 @@ const PlayerPage = () => {
         }, 10000);
 
         return () => clearInterval(interval);
-    }, [isPlaying, progress, currentEpisode, bookId, drama]);
+    }, [isPlaying, progress, currentEpisodeIndex, bookId, drama]);
 
     // Auto-hide controls
     useEffect(() => {
@@ -176,8 +232,16 @@ const PlayerPage = () => {
 
     if (loading) {
         return (
-            <div className="fixed inset-0 bg-black text-white z-50 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+            <div className="fixed inset-0 bg-black text-white z-50 flex flex-col p-4">
+                <Skeleton variant="rectangle" className="w-full aspect-video rounded-2xl mb-6 mt-12" />
+                <div className="space-y-4">
+                    <Skeleton className="w-3/4 h-8" />
+                    <Skeleton className="w-1/4 h-6" />
+                    <Skeleton className="w-full h-20" />
+                    <div className="grid grid-cols-5 gap-2 pt-4">
+                        {[1, 2, 3, 4, 5].map(i => <Skeleton key={i} className="h-10 rounded-lg" />)}
+                    </div>
+                </div>
             </div>
         );
     }
@@ -189,7 +253,6 @@ const PlayerPage = () => {
                 {videoUrl ? (
                     <video
                         ref={videoRef}
-                        src={videoUrl}
                         className="w-full h-full object-contain bg-black"
                         onTimeUpdate={handleVideoProgress}
                         onLoadedMetadata={(e) => setDuration(e.target.duration)}
@@ -198,15 +261,22 @@ const PlayerPage = () => {
                         muted={isMuted}
                     />
                 ) : (
-                    <img
-                        src={drama?.coverWap || drama?.cover || "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop"}
-                        alt={drama?.bookName || "Video Background"}
-                        className="w-full h-full object-cover opacity-60"
-                    />
+                    <div className="relative w-full h-full flex items-center justify-center">
+                        <img
+                            src={drama?.coverWap || drama?.cover || "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=2525&auto=format&fit=crop"}
+                            alt={drama?.bookName || "Video Background"}
+                            className="w-full h-full object-cover opacity-60"
+                        />
+                        {videoLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+                            </div>
+                        )}
+                    </div>
                 )}
 
                 {/* Play/Pause Overlay */}
-                {!isPlaying && showControls && (
+                {!isPlaying && showControls && !videoLoading && (
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <div className="bg-black/40 rounded-full p-6">
                             <Play size={48} className="text-white fill-white ml-1" />

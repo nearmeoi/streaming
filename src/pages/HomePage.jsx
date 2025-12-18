@@ -5,6 +5,8 @@ import { useDarkMode } from "../contexts/DarkModeContext";
 import { useData } from "../contexts/DataContext";
 import LazyImage from "../components/LazyImage";
 
+import Skeleton from "../components/Skeleton";
+
 const HomePage = () => {
     const { darkMode } = useDarkMode();
     const { featured, trending, isHomeLoaded, homeError, fetchHomeData } = useData();
@@ -22,14 +24,41 @@ const HomePage = () => {
     }, [isHomeLoaded, fetchHomeData]);
 
     if (loading && !isHomeLoaded) return (
-        <div className={`pb-20 sm:pb-24 flex justify-center items-center h-64 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
-            <div className={darkMode ? 'text-white' : 'text-black'}>Memuat...</div>
+        <div className={`min-h-screen pb-32 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
+            {/* Hero Skeleton */}
+            <Skeleton variant="hero" className="mb-8" />
+
+            {/* Trending Section Skeleton */}
+            <div className="px-6">
+                <div className="flex items-center justify-between mb-5">
+                    <Skeleton className="w-32 h-7" />
+                    <Skeleton className="w-16 h-5" />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6">
+                    {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+                        <div key={i} className="flex flex-col gap-2">
+                            <Skeleton variant="movieCard" />
+                            <Skeleton className="w-3/4 h-4 mt-1" />
+                            <Skeleton className="w-1/2 h-3" />
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     );
 
     if (homeError && !featured && trending.length === 0) return (
-        <div className={`pb-20 sm:pb-24 flex justify-center items-center h-64 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
-            <div className="text-red-500 text-lg">Error: {homeError}</div>
+        <div className={`flex flex-col items-center justify-center min-h-[60vh] px-8 text-center ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
+            <div className="bg-red-500/10 p-4 rounded-full mb-4">
+                <p className="text-red-500 text-lg font-bold">Terjadi Kesalahan</p>
+            </div>
+            <p className={`text-sm opacity-60 mb-6 ${darkMode ? 'text-white' : 'text-black'}`}>{homeError}</p>
+            <button
+                onClick={() => fetchHomeData(true)}
+                className="bg-primary text-white px-6 py-2 rounded-full font-bold active:scale-95 transition-transform"
+            >
+                Coba Lagi
+            </button>
         </div>
     );
 

@@ -31,25 +31,28 @@ export const DataProvider = ({ children }) => {
             // New API returns sections array: [{ title, movies: [...] }, ...]
             const sections = await apiService.get('/api/home?lang=in');
 
-            // Extract movies from all sections
-            const allMovies = [];
+            // Extract movies from all sections and deduplicate
+            const movieMap = new Map();
             if (Array.isArray(sections)) {
                 sections.forEach(section => {
                     if (section.movies && Array.isArray(section.movies)) {
                         section.movies.forEach(movie => {
-                            // Transform to expected format
-                            allMovies.push({
-                                bookId: movie.id,
-                                bookName: movie.title,
-                                coverWap: movie.poster,
-                                introduction: movie.description || '',
-                                tags: movie.genres || [],
-                                episodeCount: movie.episodeCount
-                            });
+                            if (!movieMap.has(movie.id)) {
+                                movieMap.set(movie.id, {
+                                    bookId: movie.id,
+                                    bookName: movie.title,
+                                    coverWap: movie.poster,
+                                    introduction: movie.description || '',
+                                    tags: movie.genres || [],
+                                    episodeCount: movie.episodeCount
+                                });
+                            }
                         });
                     }
                 });
             }
+
+            const allMovies = Array.from(movieMap.values());
 
             // First movie as featured, rest as trending
             const newFeatured = allMovies.length > 0 ? allMovies[0] : null;
@@ -74,25 +77,29 @@ export const DataProvider = ({ children }) => {
         }
 
         try {
-            // Reuse home data transformation
+            // Reuse home data transformation and deduplicate
             const sections = await apiService.get('/api/home?lang=in');
-            const allMovies = [];
+            const movieMap = new Map();
             if (Array.isArray(sections)) {
                 sections.forEach(section => {
                     if (section.movies && Array.isArray(section.movies)) {
                         section.movies.forEach(movie => {
-                            allMovies.push({
-                                bookId: movie.id,
-                                bookName: movie.title,
-                                coverWap: movie.poster,
-                                introduction: movie.description || '',
-                                tags: movie.genres || [],
-                                episodeCount: movie.episodeCount
-                            });
+                            if (!movieMap.has(movie.id)) {
+                                movieMap.set(movie.id, {
+                                    bookId: movie.id,
+                                    bookName: movie.title,
+                                    coverWap: movie.poster,
+                                    introduction: movie.description || '',
+                                    tags: movie.genres || [],
+                                    episodeCount: movie.episodeCount
+                                });
+                            }
                         });
                     }
                 });
             }
+
+            const allMovies = Array.from(movieMap.values());
 
             setForYou(allMovies);
             setIsForYouLoaded(true);

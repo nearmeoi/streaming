@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useDarkMode } from "../contexts/DarkModeContext";
 import { apiService } from "../services/apiService";
 import LazyImage from "../components/LazyImage";
+import Skeleton from "../components/Skeleton";
 
 const SearchPage = () => {
     const { darkMode } = useDarkMode();
@@ -77,8 +78,14 @@ const SearchPage = () => {
             {/* Results */}
             <div className="px-6 mt-2">
                 {loading ? (
-                    <div className="flex justify-center py-20">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+                    <div className="grid grid-cols-2 gap-4 py-4">
+                        {[1, 2, 3, 4].map((i) => (
+                            <div key={i} className="flex flex-col gap-2">
+                                <Skeleton variant="movieCard" />
+                                <Skeleton className="w-3/4 h-4 mt-1" />
+                                <Skeleton className="w-1/2 h-3" />
+                            </div>
+                        ))}
                     </div>
                 ) : isSearching || searchResults.length > 0 ? (
                     <div>

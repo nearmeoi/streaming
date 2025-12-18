@@ -20,7 +20,7 @@ const ProfilePage = () => {
             {/* Header / Avatar */}
             <div className="pt-12 pb-8 px-6 flex flex-col items-center">
                 <div className="relative group">
-                    <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-br from-primary via-purple-500 to-blue-500">
+                    <div className="w-24 h-24 rounded-full p-1 bg-gradient-to-br from-primary via-purple-500 to-blue-500 shadow-lg">
                         <div className={`w-full h-full rounded-full overflow-hidden border-4 ${darkMode ? 'border-background-dark' : 'border-gray-50'}`}>
                             <img
                                 src="https://i.pravatar.cc/150?img=12"
@@ -34,49 +34,10 @@ const ProfilePage = () => {
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>ID: 88392019</p>
             </div>
 
-            {/* Premium Card */}
-            <div className="px-6 mb-8">
-                <div className={`w-full h-40 rounded-3xl p-6 relative overflow-hidden shadow-2xl group transition-colors duration-300
-                    ${darkMode
-                        ? 'bg-gradient-to-r from-gray-900 to-gray-800 text-white shadow-black/20'
-                        : 'bg-gradient-to-r from-primary to-purple-600 text-white shadow-primary/30'
-                    }
-                `}>
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-10 -mt-10" />
-
-                    <div className="relative z-10 h-full flex flex-col justify-between">
-                        <div className="flex justify-between items-start">
-                            <div>
-                                <h3 className="flex items-center gap-2 font-bold text-lg mb-1">
-                                    <Crown size={20} className="text-yellow-400 fill-yellow-400" />
-                                    Member VIP
-                                </h3>
-                                <p className="text-xs text-white/80 font-mono">Berlaku s/d Des 20, 2025</p>
-                            </div>
-                            <span className="bg-white/20 px-3 py-1 rounded-full text-xs font-bold backdrop-blur-sm border border-white/10">
-                                PREMIER
-                            </span>
-                        </div>
-
-                        <div className="flex justify-between items-end">
-                            <div>
-                                <p className="text-xs text-white/80 mb-1">Saldo</p>
-                                <p className="text-2xl font-bold font-mono tracking-wider">2.450</p>
-                            </div>
-                            <button className={`text-xs font-bold px-4 py-2 rounded-xl shadow-lg active:scale-95 transition-transform ${darkMode ? 'bg-primary text-white shadow-primary/30' : 'bg-white text-primary shadow-black/10'}`}>
-                                Top Up
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {/* Menu Groups */}
             <div className="px-6 space-y-6">
-                {/* Group 1 */}
+                {/* Mode Gelap */}
                 <div className={`rounded-3xl p-2 ${darkMode ? 'bg-white/5' : 'bg-white shadow-lg shadow-gray-200/50'}`}>
-                    <MenuItem icon={<Wallet size={20} className="text-green-500" />} label="Dompet Saya" value="Rp 42.000" darkMode={darkMode} />
-                    <MenuItem icon={<Bell size={20} className="text-orange-500" />} label="Notifikasi" badge="2" darkMode={darkMode} />
                     <MenuItem
                         icon={<Moon size={20} className="text-purple-500" />}
                         label="Mode Gelap"
@@ -85,14 +46,14 @@ const ProfilePage = () => {
                     />
                 </div>
 
-                {/* Group 2 */}
+                {/* Additional Settings */}
                 <div className={`rounded-3xl p-2 ${darkMode ? 'bg-white/5' : 'bg-white shadow-lg shadow-gray-200/50'}`}>
                     <MenuItem icon={<Shield size={20} className="text-blue-500" />} label="Keamanan" darkMode={darkMode} />
                     <MenuItem icon={<HelpCircle size={20} className="text-pink-500" />} label="Pusat Bantuan" darkMode={darkMode} />
                 </div>
 
                 {/* Logout */}
-                <button className="w-full py-4 text-red-500 font-bold text-sm bg-red-500/10 rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+                <button className="w-full py-4 text-white font-bold text-sm bg-red-500 rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-red-500/20">
                     <LogOut size={18} />
                     Keluar
                 </button>

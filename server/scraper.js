@@ -27,6 +27,17 @@ function cleanTitleFromSlug(url) {
     }
 }
 
+// Helper: Extract Next.js data
+function extractNextData($) {
+    try {
+        const script = $('#__NEXT_DATA__').html();
+        if (!script) return null;
+        return JSON.parse(script);
+    } catch (e) {
+        return null;
+    }
+}
+
 // Helper: Fetch HTML and parse with Cheerio
 async function fetchHTML(url) {
     const response = await fetch(url, {
@@ -98,6 +109,55 @@ export async function getHomePage(lang = 'in') {
         const url = getUrl('', lang);
         const $ = await fetchHTML(url);
 
+        // Try to get data from __NEXT_DATA__ first (More robust)
+        const nextData = extractNextData($);
+        if (nextData && nextData.props && nextData.props.pageProps) {
+            const sections = [];
+            const { bigList, smallData } = nextData.props.pageProps;
+
+            // Featured/Swiper section
+            if (bigList && bigList.length > 0) {
+                sections.push({
+                    title: lang === 'in' ? 'Drama Unggulan' : 'Featured Drama',
+                    movies: bigList.map(item => ({
+                        id: item.bookId || item.action,
+                        title: item.bookName || item.name,
+                        poster: item.cover,
+                        description: item.introduction,
+                        episodeCount: item.chapterCount,
+                        url: BASE_URL + (lang === 'en' ? '' : '/' + lang) + `/movie/${item.bookId || item.action}/${item.bookNameLower || item.bookNameEn}`
+                    }))
+                });
+            }
+
+            // Other sections from smallData
+            if (smallData) {
+                // smallData can be an array or an object with numeric keys
+                const sectionEntries = Array.isArray(smallData) ? smallData : Object.values(smallData);
+
+                sectionEntries.forEach(section => {
+                    if (section.items && section.items.length > 0) {
+                        sections.push({
+                            title: section.name || 'Untitled',
+                            movies: section.items.map(item => ({
+                                id: item.bookId || item.action,
+                                title: item.bookName || item.name,
+                                poster: item.cover,
+                                description: item.introduction,
+                                episodeCount: item.chapterCount,
+                                url: BASE_URL + (lang === 'en' ? '' : '/' + lang) + `/movie/${item.bookId || item.action}/${item.bookNameLower || item.bookNameEn}`
+                            })).slice(0, 20)
+                        });
+                    }
+                });
+            }
+
+            if (sections.length > 0) {
+                return { success: true, data: sections };
+            }
+        }
+
+        // Fallback to DOM scraping if JSON is missing or empty
         const sections = [];
 
         // Find section headers and their content
@@ -202,6 +262,24 @@ export async function searchMovies(query, lang = 'in') {
         const searchUrl = `${url}?keyword=${encodeURIComponent(query)}`;
         const $ = await fetchHTML(searchUrl);
 
+        // Try JSON first
+        const nextData = extractNextData($);
+        if (nextData && nextData.props && nextData.props.pageProps && nextData.props.pageProps.searchData) {
+            const { list } = nextData.props.pageProps.searchData;
+            if (list && list.length > 0) {
+                return {
+                    success: true,
+                    data: list.map(item => ({
+                        id: item.bookId || item.action,
+                        title: item.bookName || item.name,
+                        poster: item.cover,
+                        episodeCount: item.chapterCount,
+                        url: BASE_URL + (lang === 'en' ? '' : '/' + lang) + `/movie/${item.bookId || item.action}/${item.bookNameLower || item.bookNameEn}`
+                    }))
+                };
+            }
+        }
+
         const results = [];
 
         $('a[href*="/movie/"]').each((i, el) => {
@@ -254,6 +332,29 @@ export async function getMovieDetail(movieId, lang = 'in') {
         const url = getUrl(`/movie/${movieId}`, lang);
         const $ = await fetchHTML(url);
 
+        // Try JSON first
+        const nextData = extractNextData($);
+        if (nextData && nextData.props && nextData.props.pageProps && nextData.props.pageProps.bookDetail) {
+            const detail = nextData.props.pageProps.bookDetail;
+            return {
+                success: true,
+                data: {
+                    id: detail.bookId || detail.action,
+                    title: detail.bookName || detail.name,
+                    description: detail.introduction,
+                    poster: detail.cover,
+                    genres: detail.typeTwoNames || detail.tags || [],
+                    episodes: (detail.chapters || []).map(ch => ({
+                        id: ch.chapterId || ch.action,
+                        title: `Episode ${ch.sort}`,
+                        episodeNumber: ch.sort,
+                        url: BASE_URL + (lang === 'en' ? '' : '/' + lang) + `/ep/${detail.bookId}_${detail.bookNameLower}/${ch.chapterId}_Episode-${ch.sort}`
+                    }))
+                }
+            };
+        }
+
+        // Fallback to DOM
         // Get title from h1 or meta
         let title = $('h1').first().text().trim() ||
             $('meta[property="og:title"]').attr('content') || '';
@@ -386,7 +487,7 @@ export async function getVideoUrl(movieId, episodeId, lang = 'in') {
         });
 
         // Wait a bit for dynamic content
-        await page.waitForTimeout(3000);
+        await new Promise(r => setTimeout(r, 3000));
 
         // Try to get video src from DOM
         const videoSrc = await page.evaluate(() => {
@@ -408,7 +509,7 @@ export async function getVideoUrl(movieId, episodeId, lang = 'in') {
         if (!videoUrl) {
             try {
                 await page.click('[class*="play"], button[class*="play"], .play-btn');
-                await page.waitForTimeout(3000);
+                await new Promise(r => setTimeout(r, 3000));
 
                 videoUrl = await page.evaluate(() => {
                     const video = document.querySelector('video');

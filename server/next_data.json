@@ -1,0 +1,1409 @@
+{
+  "props": {
+    "pageProps": {
+      "bigList": [
+        {
+          "name": "Antara Gengsi dan Kasih Keluarga",
+          "actionType": "BOOK",
+          "action": "41000119953",
+          "bookId": "41000119953",
+          "originalBookId": "41000120043",
+          "bookName": "Antara Gengsi dan Kasih Keluarga",
+          "author": "Webfic",
+          "introduction": "Di pesta ulang tahun pernikahan orang tuanya, seorang presiden direktur sukses dianggap sebagai orang rendahan, hadiah berlian dari dirinya disebut palsu, bahkan dia diusir dari meja pesta!",
+          "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000120043/41000120043.jpg@w=240&h=400",
+          "tags": [
+            "Family Bonds",
+            "Strong Female Lead"
+          ],
+          "labels": [
+            "Family Bonds",
+            "Strong Female Lead"
+          ],
+          "viewCount": 17178,
+          "typeOneNames": [
+            "Wanita"
+          ],
+          "typeTwoNames": [
+            "Wanita Tangguh"
+          ],
+          "typeTwoList": [
+            {
+              "id": 463,
+              "name": "Wanita Tangguh",
+              "replaceName": "wanita-tangguh"
+            }
+          ],
+          "top": 0,
+          "replacedBookName": "Antara-Gengsi-dan-Kasih-Keluarga",
+          "typeOneName": "Wanita",
+          "typeTwoName": "Wanita-Tangguh",
+          "chapterCount": 63,
+          "bookNameEn": "Queen-Mom-Rules",
+          "bookNameLower": "queen-mom-rules",
+          "viewCountDisplay": "17.2K",
+          "lastUpdateTimeDisplay": "Completed"
+        },
+        {
+          "name": "Dendam Hati yang Tersakiti",
+          "actionType": "BOOK",
+          "action": "41000116643",
+          "bookId": "41000116643",
+          "originalBookId": "41000117164",
+          "bookName": "Dendam Hati yang Tersakiti",
+          "author": "Webfic",
+          "introduction": "Alessia pulang ke rumah setelah bertahun-tahun di luar negeri untuk menghadiri pesta pertunangan Lorenzo, adiknya. Kedatangan Alessia yang sedang hamil dan disambut Lorenzo terlihat oleh calon mertua Lorenzo yang melaporkannya pada Sophie, tunangannya. Sophie yang menyangka Alessia selingkuhan Lorenzo melabrak Alessia dan menyeretnya ke pesta pertunangan untuk dipermalukan. Situasi semakin tak terkendali hingga akhirnya Lorenzo datang dan mengungkap kebenarannya.",
+          "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000117164/41000117164.jpg@w=240&h=400",
+          "tags": [
+            "Family Bonds",
+            "Strong Female Lead"
+          ],
+          "labels": [
+            "Family Bonds",
+            "Strong Female Lead"
+          ],
+          "viewCount": 14733,
+          "typeOneNames": [
+            "Wanita"
+          ],
+          "typeTwoNames": [
+            "Melawan Balik"
+          ],
+          "typeTwoList": [
+            {
+              "id": 462,
+              "name": "Melawan Balik",
+              "replaceName": "melawan-balik"
+            }
+          ],
+          "top": 0,
+          "replacedBookName": "Dendam-Hati-yang-Tersakiti",
+          "typeOneName": "Wanita",
+          "typeTwoName": "Melawan-Balik",
+          "chapterCount": 51,
+          "bookNameEn": "Divorced-at-the-Wedding-Day",
+          "bookNameLower": "divorced-at-the-wedding-day",
+          "viewCountDisplay": "14.7K",
+          "lastUpdateTimeDisplay": "Completed"
+        },
+        {
+          "name": "Bantu Aku Memiliki Cintanya",
+          "actionType": "BOOK",
+          "action": "41000116285",
+          "bookId": "41000116285",
+          "originalBookId": "41000117165",
+          "bookName": "Bantu Aku Memiliki Cintanya",
+          "author": "Webfic",
+          "introduction": "Dora bergabung dengan tim hoki es kampusnya demi mendekati Leo, pemain hoki es yang ditaksirnya sejak kecil. Setelah sebuah penolakan yang memalukan, Dora bersepakat dengan kapten tim hoki es, Troy untuk membantunya merebut hati Leo. Troy yang mengajari Dora lama kelamaan jatuh hati padanya, sementara Dora yang berhasil mendekati Leo berkat ajaran Troy semakin paham kalau Leo yang ditaksirnya bukanlah seperti dugaannya...",
+          "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000117165/41000117165.jpg@w=240&h=400",
+          "tags": [
+            "Student",
+            "Love Triangle"
+          ],
+          "labels": [
+            "Student",
+            "Love Triangle"
+          ],
+          "viewCount": 10729,
+          "typeOneNames": [
+            "Wanita"
+          ],
+          "typeTwoNames": [
+            "Romansa"
+          ],
+          "typeTwoList": [
+            {
+              "id": 447,
+              "name": "Romansa",
+              "replaceName": "romansa"
+            }
+          ],
+          "top": 0,
+          "replacedBookName": "Bantu-Aku-Memiliki-Cintanya",
+          "typeOneName": "Wanita",
+          "typeTwoName": "Romansa",
+          "chapterCount": 58,
+          "bookNameEn": "A-Deal-With-The-Hockey-Captain",
+          "bookNameLower": "a-deal-with-the-hockey-captain",
+          "viewCountDisplay": "10.7K",
+          "lastUpdateTimeDisplay": "Completed"
+        }
+      ],
+      "smallData": [
+        {
+          "id": 1272,
+          "name": "必看好剧",
+          "style": "SMALL_CARD_LIST",
+          "items": [
+            {
+              "name": "Antara Gengsi dan Kasih Keluarga",
+              "actionType": "BOOK",
+              "action": "41000119953",
+              "bookId": "41000119953",
+              "originalBookId": "41000120043",
+              "bookName": "Antara Gengsi dan Kasih Keluarga",
+              "author": "Webfic",
+              "introduction": "Di pesta ulang tahun pernikahan orang tuanya, seorang presiden direktur sukses dianggap sebagai orang rendahan, hadiah berlian dari dirinya disebut palsu, bahkan dia diusir dari meja pesta!",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000120043/41000120043.jpg@w=240&h=400",
+              "tags": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "labels": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "viewCount": 17178,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Wanita Tangguh"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 463,
+                  "name": "Wanita Tangguh",
+                  "replaceName": "wanita-tangguh"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Antara-Gengsi-dan-Kasih-Keluarga",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Wanita-Tangguh",
+              "chapterCount": 63,
+              "bookNameEn": "Queen-Mom-Rules",
+              "bookNameLower": "queen-mom-rules",
+              "viewCountDisplay": "17.2K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Kembalinya Sang Putra Pewaris (Sulih Suara)",
+              "actionType": "BOOK",
+              "action": "41000107529",
+              "bookId": "41000107529",
+              "originalBookId": "41000108364",
+              "bookName": "Kembalinya Sang Putra Pewaris (Sulih Suara)",
+              "author": "Webfic",
+              "introduction": "Tommy Lutfi merancang sebuah paten dan memberikannya kepada tunangannya. Dia ingin tunangannya mendapatkan penghargaan dari Grup Tirtajaya. Namun, saat upacara penghargaan, Tommy harus menelan pil pahit. Tunangannya telah mengkhianatinya. Bahkan, untuk menyenangkan seorang pria kaya, tunangannya berniat melukai Tommy. Pada saat yang kritis, ketua Grup Tirtajaya dan mengungkapkan sebuah rahasia mengejutkan bahwa Tommy adalah putra kandungnya yang telah lama hilang.",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000108364/41000108364.jpg@w=240&h=400",
+              "tags": [
+                "Modern",
+                "The Chosen One"
+              ],
+              "labels": [
+                "Modern",
+                "The Chosen One"
+              ],
+              "viewCount": 16942,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Urban"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 427,
+                  "name": "Urban",
+                  "replaceName": "urban"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Kembalinya-Sang-Putra-Pewaris-Sulih-Suara",
+              "typeOneName": "Pria",
+              "typeTwoName": "Urban",
+              "chapterCount": 96,
+              "bookNameEn": "The-Lost-Heir-His-Dawn-of-Reckoning-DUBBED",
+              "bookNameLower": "the-lost-heir-his-dawn-of-reckoning-dubbed",
+              "viewCountDisplay": "16.9K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Mengharumkan Nama Kampung Halaman (Sulih Suara)",
+              "actionType": "BOOK",
+              "action": "41000103524",
+              "bookId": "41000103524",
+              "originalBookId": "41000105821",
+              "bookName": "Mengharumkan Nama Kampung Halaman (Sulih Suara)",
+              "author": "Webfic",
+              "introduction": "Pada Tahun Baru, Joe mengunjungi keluarga mertuanya untuk mengucapkan selamat tahun baru, tetapi dia malah mendapat perlakuan dingin dari seluruh keluarga istrinya. Mereka tidak tahu bahwa identitas asli Joe adalah Presdir Grup Sava yang masuk dalam 10 besar nasional!",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000105821/41000105821.jpg@w=240&h=400",
+              "tags": [
+                "Modern",
+                "Family Intrigue"
+              ],
+              "labels": [
+                "Modern",
+                "Family Intrigue"
+              ],
+              "viewCount": 11827,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Urban"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 427,
+                  "name": "Urban",
+                  "replaceName": "urban"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Mengharumkan-Nama-Kampung-Halaman-Sulih-Suara",
+              "typeOneName": "Pria",
+              "typeTwoName": "Urban",
+              "chapterCount": 89,
+              "bookNameEn": "Fortunes-Unveiled-My-Husband-Is-a-Big-Shot-DUBBED",
+              "bookNameLower": "fortunes-unveiled-my-husband-is-a-big-shot-dubbed",
+              "viewCountDisplay": "11.8K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Kaisar Pulang ke Desa (Sulih Suara)",
+              "actionType": "BOOK",
+              "action": "41000111652",
+              "bookId": "41000111652",
+              "originalBookId": "41000112448",
+              "bookName": "Kaisar Pulang ke Desa (Sulih Suara)",
+              "author": "Webfic",
+              "introduction": "Sebelum meninggalkan kampung halamannya, Alingga berjanji pada tunangannya, Rinjani, bahwa ketika dia menjadi kaisar, dia akan kembali dan menjadikan Rinjani sebagai permaisuri. Bertahun-tahun kemudian, dia naik takhta sebagai kaisar. Untuk menepati janjinya, dia memutuskan untuk menyamar dan kembali ke kampung halamannya. Namun, saat memasuki gerbang kota, dia mendapati tunangannya, Rinjani, telah berubah hati dan akan menikah dengan putra Bupati...",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000112448/41000112448.jpg@w=240&h=400",
+              "tags": [
+                "Historical",
+                "Revenge"
+              ],
+              "labels": [
+                "Historical",
+                "Revenge"
+              ],
+              "viewCount": 14428,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Identitas Rahasia"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 441,
+                  "name": "Identitas Rahasia",
+                  "replaceName": "identitas-rahasia"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Kaisar-Pulang-ke-Desa-Sulih-Suara",
+              "typeOneName": "Pria",
+              "typeTwoName": "Identitas-Rahasia",
+              "chapterCount": 63,
+              "bookNameEn": "Return-of-His-Majesty-DUBBED",
+              "bookNameLower": "return-of-his-majesty-dubbed",
+              "viewCountDisplay": "14.4K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Suami Miskinku Ternyata Seorang Miliarder",
+              "actionType": "BOOK",
+              "action": "41000107888",
+              "bookId": "41000107888",
+              "originalBookId": "41000108836",
+              "bookName": "Suami Miskinku Ternyata Seorang Miliarder",
+              "author": "Webfic",
+              "introduction": "Stella pernah melakukan cinta satu malam dengan seorang pria asing, dan dia mengira pria itu adalah orang yang telah menjerumuskan dirinya ke dalam skandal prostitusi yang menghancurkan hidupnya. Tiga tahun kemudian, Stella menikah dengan seorang pria bernama Ezra. Dalam sekejap, keduanya pun segera jatuh cinta. Namun, lambat laun Stella menyadari bahwa Ezra mirip dengan pria tiga tahun lalu itu ...",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000108836/41000108836.jpg@w=240&h=400",
+              "tags": [
+                "Love After Marriage",
+                "Hidden Identity"
+              ],
+              "labels": [
+                "Love After Marriage",
+                "Hidden Identity"
+              ],
+              "viewCount": 12781,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Suami-Miskinku-Ternyata-Seorang-Miliarder",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 58,
+              "bookNameEn": "My-Poor-Husband-is-A-Billionaire",
+              "bookNameLower": "my-poor-husband-is-a-billionaire",
+              "viewCountDisplay": "12.8K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Mantan Istriku Jadi CEO",
+              "actionType": "BOOK",
+              "action": "41000108539",
+              "bookId": "41000108539",
+              "originalBookId": "41000109843",
+              "bookName": "Mantan Istriku Jadi CEO",
+              "author": "Webfic",
+              "introduction": "Sharon Green, seorang desainer yang juga pemilik dan CEO grup desain terkemuka, menyembunyikan identitasnya demi menjaga perasaan Martin, suaminya, agar tidak merasa tertekan. Walaupun sepenuh hati mendukung suaminya, dia mendapatkan pengkhianatan dan penghinaan. Setelah bercerai, Sharon mengungkap identitas aslinya pada sebuah gala, memutus kontrak kerja bisnis Martin dan mendapatkan kembali pengaruhnya sebagai seorang wanita yang kuat dan mandiri.",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000109843/41000109843.jpg@w=240&h=400",
+              "tags": [
+                "Strong Female Lead",
+                "Hidden Identity"
+              ],
+              "labels": [
+                "Strong Female Lead",
+                "Hidden Identity"
+              ],
+              "viewCount": 13030,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Mantan-Istriku-Jadi-CEO",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 59,
+              "bookNameEn": "The-Divorced-Housewife-Turned-CEO",
+              "bookNameLower": "the-divorced-housewife-turned-ceo",
+              "viewCountDisplay": "13.0K",
+              "lastUpdateTimeDisplay": "Completed"
+            }
+          ],
+          "more": false
+        },
+        {
+          "id": 1273,
+          "name": "当前热播",
+          "style": "SMALL_CARD_LIST",
+          "items": [
+            {
+              "name": "Cinta Sejati Kencan Palsu",
+              "actionType": "BOOK",
+              "action": "41000119532",
+              "bookId": "41000119532",
+              "originalBookId": "41000120498",
+              "bookName": "Cinta Sejati Kencan Palsu",
+              "author": "Webfic",
+              "introduction": "Akibat memukul Ronan, Tessa dikeluarkan dari sekolahnya. Enam tahun kemudian, Tessa kembali ke SMA North Lake. Dalam sebuah pesta, akibat mabuk Tessa bercinta dengan Ronan yang ternyata seorang pewaris Keluarga Beaumont, musuh bebuyutannya sejak kecil. Dari awalnya saling membenci, akhirnya mereka berdua bekerjasama untuk membuat mantan-mantan mereka marah. Akankah mereka akhirnya jatuh cinta?",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000120498/41000120498.jpg@w=240&h=400",
+              "tags": [
+                "Childhood Sweetheart",
+                "Modern"
+              ],
+              "labels": [
+                "Childhood Sweetheart",
+                "Modern"
+              ],
+              "viewCount": 17922,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Cinta-Sejati-Kencan-Palsu",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 62,
+              "bookNameEn": "Fake-Dating-My-Rich-Nemesis",
+              "bookNameLower": "fake-dating-my-rich-nemesis",
+              "viewCountDisplay": "17.9K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Kau Bukan Siapa-siapa Bagiku",
+              "actionType": "BOOK",
+              "action": "41000121776",
+              "bookId": "41000121776",
+              "originalBookId": "41000122558",
+              "bookName": "Kau Bukan Siapa-siapa Bagiku",
+              "author": "Webfic",
+              "introduction": " Sebastian, seorang CEO miliarder, mengajak Eleanor untuk menikah demi menghindari pernikahan paksa keluarganya. Walau awalnya menolak, Eleanor akhirnya setuju menikah dengan Sebastian setelah menolongnya saat Eleanor dicampakkan dan dihina tunangan yang sudah dibiayainya. Yang tidak diketahui Sebastian, Eleanor adalah seorang CEO miliarder rahasia yang lebih berpengaruh. Setelah rahasia terungkap, akankah cinta mereka bertahan?",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000122558/41000122558.jpg@w=240&h=400",
+              "tags": [
+                "Strong Female Lead",
+                "Billionaire"
+              ],
+              "labels": [
+                "Strong Female Lead",
+                "Billionaire"
+              ],
+              "viewCount": 16704,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Kau-Bukan-Siapa-siapa-Bagiku",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 64,
+              "bookNameEn": "Watch-Out-I-m-The-Lady-Boss",
+              "bookNameLower": "watch-out-i-m-the-lady-boss",
+              "viewCountDisplay": "16.7K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Hati yang Tersesat",
+              "actionType": "BOOK",
+              "action": "41000110445",
+              "bookId": "41000110445",
+              "originalBookId": "41000111067",
+              "bookName": "Hati yang Tersesat",
+              "author": "Webfic",
+              "introduction": "Alleta terikat dengan dua bersaudara Keluarga Aksara, Alzian dan Elzion selama dua puluh tahun. Kedua saudara itu pernah sangat menyayanginya, tetapi semuanya berubah setelah kehadiran Kania. Alleta menderita banyak ketidakadilan, dan perlahan menjauh dari saudara-saudara Keluarga Aksara. Alleta akhirnya putus asa dan memutuskan untuk menikah dengan pewaris Keluarga Danendra, meninggalkan tempat yang menyakitkan ini...",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000111067/41000111067.jpg@w=240&h=400",
+              "tags": [
+                "Second Chance",
+                "Family Intrigue"
+              ],
+              "labels": [
+                "Second Chance",
+                "Family Intrigue"
+              ],
+              "viewCount": 16302,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Hati-yang-Tersesat",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 50,
+              "bookNameEn": "Forever-Was-a-Lie",
+              "bookNameLower": "forever-was-a-lie",
+              "viewCountDisplay": "16.3K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Antara Gengsi dan Kasih Keluarga",
+              "actionType": "BOOK",
+              "action": "41000119953",
+              "bookId": "41000119953",
+              "originalBookId": "41000120043",
+              "bookName": "Antara Gengsi dan Kasih Keluarga",
+              "author": "Webfic",
+              "introduction": "Di pesta ulang tahun pernikahan orang tuanya, seorang presiden direktur sukses dianggap sebagai orang rendahan, hadiah berlian dari dirinya disebut palsu, bahkan dia diusir dari meja pesta!",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000120043/41000120043.jpg@w=240&h=400",
+              "tags": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "labels": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "viewCount": 17178,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Wanita Tangguh"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 463,
+                  "name": "Wanita Tangguh",
+                  "replaceName": "wanita-tangguh"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Antara-Gengsi-dan-Kasih-Keluarga",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Wanita-Tangguh",
+              "chapterCount": 63,
+              "bookNameEn": "Queen-Mom-Rules",
+              "bookNameLower": "queen-mom-rules",
+              "viewCountDisplay": "17.2K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Menemukan Kembali Cinta yang Hilang",
+              "actionType": "BOOK",
+              "action": "41000103356",
+              "bookId": "41000103356",
+              "originalBookId": "41000103828",
+              "bookName": "Menemukan Kembali Cinta yang Hilang",
+              "author": "Webfic",
+              "introduction": "Setelah melakukan hubungan semalam dengan seseorang demi uang, Anita mengucapkan selamat tinggal kepada kota yang kelam ini untuk pergi ke luar negeri. Enam tahun kemudian, dia kembali bersama putranya, lalu bertemu dengan sang presdir legendaris, yaitu Tristan, yang kemudian menjadi bos barunya. Sebelum dia mengetahui hal itu, putranya sudah mulai memanggil si bos baru yang ganteng itu dengan panggilan “ayah”. Apakah ini takdir?",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000103828/41000103828.jpg@w=240&h=400",
+              "tags": [
+                "Single Mom",
+                "Billionaire"
+              ],
+              "labels": [
+                "Single Mom",
+                "Billionaire"
+              ],
+              "viewCount": 16001,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Cinta Sejati"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 469,
+                  "name": "Cinta Sejati",
+                  "replaceName": "cinta-sejati"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Menemukan-Kembali-Cinta-yang-Hilang",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Cinta-Sejati",
+              "chapterCount": 56,
+              "bookNameEn": "One-Fateful-Night-with-My-Boss",
+              "bookNameLower": "one-fateful-night-with-my-boss",
+              "viewCountDisplay": "16.0K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Bangkit dan Berkuasa (Sulih Suara)",
+              "actionType": "BOOK",
+              "action": "41000110123",
+              "bookId": "41000110123",
+              "originalBookId": "41000107468",
+              "bookName": "Bangkit dan Berkuasa (Sulih Suara)",
+              "author": "Webfic",
+              "introduction": "Rendy mendanai pacarnya Lini menyelesaikan kuliah dan menyukseskan kariernya. Namun, Lini malah dengan kejam meminta putus dengan alasan bahwa mereka sudah berada di dunia yang berbeda dan Rendy sudah tidak sepadan dengannya. Saat bersamaan, Ratu Bisnis, CEO cantik yang Bernama Friska menyadari kelebihan Rendy. Dia lalu mengajak Rendy menikah dan mereka pun menjadi suami istri yang mengejutkan semua orang… ",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000107468/41000107468.jpg@w=240&h=400",
+              "tags": [
+                "A Nobody",
+                "Modern"
+              ],
+              "labels": [
+                "A Nobody",
+                "Modern"
+              ],
+              "viewCount": 14709,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Urban"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 427,
+                  "name": "Urban",
+                  "replaceName": "urban"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Bangkit-dan-Berkuasa-Sulih-Suara",
+              "typeOneName": "Pria",
+              "typeTwoName": "Urban",
+              "chapterCount": 90,
+              "bookNameEn": "Reveal-Rise-and-Reign-DUBBED",
+              "bookNameLower": "reveal-rise-and-reign-dubbed",
+              "viewCountDisplay": "14.7K",
+              "lastUpdateTimeDisplay": "Completed"
+            }
+          ],
+          "more": false
+        },
+        {
+          "id": 1274,
+          "name": "精彩剧集",
+          "style": "SMALL_CARD_LIST",
+          "items": [
+            {
+              "name": "Bunga Mekar dari Air Mata (Sulih Suara)",
+              "actionType": "BOOK",
+              "action": "41000122380",
+              "bookId": "41000122380",
+              "originalBookId": "42000000722",
+              "bookName": "Bunga Mekar dari Air Mata (Sulih Suara)",
+              "author": "Webfic",
+              "introduction": "Tujuh tahun lalu, Elara melahirkan anak kembar untuk Keluarga Clarke, namun darahnya diambil untuk menyelamatkan Nathan, cucu tertua mereka. Suaminya, Adrian, hanya menemukan jenazah Elara. Kini, Elara yang kehilangan ingatan dan bisu, membesarkan putrinya, Gia, sebagai pemulung. Takdir mempertemukan Gia dengan Nathan. Sebuah karangan \"Ibuku\" memicu konflik, dan Gia memohon pada Adrian, \"Paman, selamatkan ibuku.\"",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000000722/42000000722.jpg@w=240&h=400",
+              "tags": [
+                "Family Bonds",
+                "Single Mom"
+              ],
+              "labels": [
+                "Family Bonds",
+                "Single Mom"
+              ],
+              "viewCount": 19804,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Bunga-Mekar-dari-Air-Mata-Sulih-Suara",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 60,
+              "bookNameEn": "Love-not-Lost-to-Memory-DUBBED",
+              "bookNameLower": "love-not-lost-to-memory-dubbed",
+              "viewCountDisplay": "19.8K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Suami untuk Tiga Tahun",
+              "actionType": "BOOK",
+              "action": "41000122328",
+              "bookId": "41000122328",
+              "originalBookId": "41000122409",
+              "bookName": "Suami untuk Tiga Tahun",
+              "author": "Webfic",
+              "introduction": "Ezra yang sudah hidup ribuan tahun menepati janji pada muridnya yang sekarat untuk menjaga keluarganya selama tiga tahun. Selama waktu itu, dia menikahi cucu sang murid, tapi malah diperlakukan dingin dan diremehkan. Meski sering disulitkan, Ezra tetap sabar. Begitu tiga tahun berlalu, dia pergi tanpa penyesalan.",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000122409/41000122409.jpg@w=240&h=400",
+              "tags": [
+                "Divine Tycoon",
+                "The Chosen One"
+              ],
+              "labels": [
+                "Divine Tycoon",
+                "The Chosen One"
+              ],
+              "viewCount": 12912,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Ahli Turun Gunung",
+                "Urban"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 437,
+                  "name": "Ahli Turun Gunung",
+                  "replaceName": "ahli-turun-gunung"
+                },
+                {
+                  "id": 427,
+                  "name": "Urban",
+                  "replaceName": "urban"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Suami-untuk-Tiga-Tahun",
+              "typeOneName": "Pria",
+              "typeTwoName": "Ahli-Turun-Gunung",
+              "chapterCount": 65,
+              "bookNameEn": "House-Husband-Try-Supreme-Immortal",
+              "bookNameLower": "house-husband-try-supreme-immortal",
+              "viewCountDisplay": "12.9K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Benih Cinta Petani Miliarder",
+              "actionType": "BOOK",
+              "action": "41000121501",
+              "bookId": "41000121501",
+              "originalBookId": "42000000446",
+              "bookName": "Benih Cinta Petani Miliarder",
+              "author": "Webfic",
+              "introduction": "Demi membiayai pengobatan ayah angkatnya, Louise setuju menggantikan saudari angkatnya Christina untuk dinikahkan dengan Troy, seorang petani. Diluar dugaan, Troy ternyata seorang miliarder tersembunyi. Namun saat hubungan mereka yang pada awalnya kaku perlahan menjadi cinta, Christina yang menyadari kesalahannya menolak Troy berusaha merebut Troy dari Louise dengan segala cara!",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x2/42x0/420x0/42000000446/42000000446.jpg@w=240&h=400",
+              "tags": [
+                "Love After Marriage",
+                "Hidden Identity"
+              ],
+              "labels": [
+                "Love After Marriage",
+                "Hidden Identity"
+              ],
+              "viewCount": 17937,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Nikah Dulu Cinta Belakangan ",
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 456,
+                  "name": "Nikah Dulu Cinta Belakangan ",
+                  "replaceName": "nikah-dulu-cinta-belakangan"
+                },
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Benih-Cinta-Petani-Miliarder",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Nikah-Dulu-Cinta-Belakangan",
+              "chapterCount": 59,
+              "bookNameEn": "Move-to-Countryside-Marry-a-Billionaire",
+              "bookNameLower": "move-to-countryside-marry-a-billionaire",
+              "viewCountDisplay": "17.9K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Aku Melintas dari Duniamu",
+              "actionType": "BOOK",
+              "action": "41000102839",
+              "bookId": "41000102839",
+              "originalBookId": "41000103760",
+              "bookName": "Aku Melintas dari Duniamu",
+              "author": "Webfic",
+              "introduction": "Lima tahun lalu, Clara menyelamatkan Jason yang dibius. Kemudian Clara melanjutkan pendidikannya di luar negeri. Lima tahun kemudian, Clara telah menjadi desainer hebat. Dia kembali dengan membawa putranya bersama Jason. Saat mengetahui bahwa Jason menderita gagal ginjal, Clara berniat menyumbangkan ginjalnya untuk menyelamatkan Jason.Jason malah membenci Clara karena kesalahpahaman. Clara menyadari kesia-siaan hubungan mereka dan memutuskan untuk fokus pada kariernya.",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000103760/41000103760.jpg@w=240&h=400",
+              "tags": [
+                "Second Chance",
+                "Revenge"
+              ],
+              "labels": [
+                "Second Chance",
+                "Revenge"
+              ],
+              "viewCount": 12131,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Romansa"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 447,
+                  "name": "Romansa",
+                  "replaceName": "romansa"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Aku-Melintas-dari-Duniamu",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Romansa",
+              "chapterCount": 104,
+              "bookNameEn": "A-Breath-Away-From-Forever",
+              "bookNameLower": "a-breath-away-from-forever",
+              "viewCountDisplay": "12.1K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Kembalinya Ratu Arogan",
+              "actionType": "BOOK",
+              "action": "41000102810",
+              "bookId": "41000102810",
+              "originalBookId": "41000103651",
+              "bookName": "Kembalinya Ratu Arogan",
+              "author": "Webfic",
+              "introduction": "Yuni Sarah awalnya adalah utusan kanan Istana Sena, mengasingkan diri bersama Putrinya Jenny Sarah di Kota Honggo, Jenny Sarah menikah dengan Dono Harto, dan mendapat kekerasan dalam rumah tangga dan pelecehan yang dilakukan oleh Dono Harto, Dono Harto diam-diam berkolusi dengan Bandit Waru bernama Daici Moto, Setelah mengetahuinya, Yuni Sarah Kembali untuk mengambil alih posisi Ratu Istana Sena, menyelamatkan Jenny Sarah, dan menghancurkan konspirasi Daici Moto.",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000103651/41000103651.jpg@w=240&h=400",
+              "tags": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "labels": [
+                "Family Bonds",
+                "Strong Female Lead"
+              ],
+              "viewCount": 15658,
+              "typeOneNames": [
+                "Wanita"
+              ],
+              "typeTwoNames": [
+                "Kembali Orang Kuat"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 550,
+                  "name": "Kembali Orang Kuat",
+                  "replaceName": "kembali-orang-kuat"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Kembalinya-Ratu-Arogan",
+              "typeOneName": "Wanita",
+              "typeTwoName": "Kembali-Orang-Kuat",
+              "chapterCount": 65,
+              "bookNameEn": "Return-of-the-Dominant-Queen",
+              "bookNameLower": "return-of-the-dominant-queen",
+              "viewCountDisplay": "15.7K",
+              "lastUpdateTimeDisplay": "Completed"
+            },
+            {
+              "name": "Supremasi Tak Terbatas",
+              "actionType": "BOOK",
+              "action": "41000102743",
+              "bookId": "41000102743",
+              "originalBookId": "41000103423",
+              "bookName": "Supremasi Tak Terbatas",
+              "author": "Webfic",
+              "introduction": "Mike Loren sebagai Tuan David yang berkuasa di Kota Daili kehilangan ingatan dan hidup sebagai orang biasa, bekerja sebagai kuli pengangkat semen dan menerima perlakukan yang tidak adil, Eva Salim yang pernah dijanjikan menikah dengannya menepati janji, mereka berdua berusaha melewati halangan dari keluarga, melewati banyak kesulitan, akhirnya mereka saling mencintai dan menjalani kehidupan yang baru bersama-sama…",
+              "cover": "https://thwztchapter.dramaboxdb.com/data/cppartner/4x1/41x0/410x0/41000103423/41000103423.jpg@w=240&h=400",
+              "tags": [
+                "Modern",
+                "Family Intrigue"
+              ],
+              "labels": [
+                "Modern",
+                "Family Intrigue"
+              ],
+              "viewCount": 13355,
+              "typeOneNames": [
+                "Pria"
+              ],
+              "typeTwoNames": [
+                "Kembali Orang Kuat"
+              ],
+              "typeTwoList": [
+                {
+                  "id": 438,
+                  "name": "Kembali Orang Kuat",
+                  "replaceName": "kembali-orang-kuat"
+                }
+              ],
+              "top": 0,
+              "replacedBookName": "Supremasi-Tak-Terbatas",
+              "typeOneName": "Pria",
+              "typeTwoName": "Kembali-Orang-Kuat",
+              "chapterCount": 102,
+              "bookNameEn": "Supremacy-Unbound-Ascending-Above-All",
+              "bookNameLower": "supremacy-unbound-ascending-above-all",
+              "viewCountDisplay": "13.4K",
+              "lastUpdateTimeDisplay": "Completed"
+            }
+          ],
+          "more": false
+        }
+      ],
+      "_nextI18Next": {
+        "initialI18nStore": {
+          "in": {
+            "common": {
+              "home": {
+                "home": "Beranda",
+                "recommend": "Untuk Anda",
+                "resources": "Sumber",
+                "browse": "Kategori",
+                "app": "Aplikasi",
+                "more": "Lainnya",
+                "privacyPolicy": "Kebijakan Privasi",
+                "termsOfUse": "Syarat Penggunaan",
+                "allRightsReserved": "Seluruh Hak Cipta",
+                "play": "Putar",
+                "back": "kembali",
+                "email": "Email",
+                "emptyDesc": "Tidak ada konten yang ditemukan",
+                "episodes": "Episode",
+                "about": "Tentang Kami",
+                "contact": "Hubungi Kami",
+                "community": "Komunitas",
+                "business": "Kooperasi bisnis",
+                "joinUs": "Bergabunglah dengan Kami"
+              },
+              "热门好剧": "Drama Terpopuler",
+              "必看好剧": "Drama yang Wajib Ditonton",
+              "当前热播": "Sedang Tren",
+              "精彩剧集": "Drama Menarik",
+              "browse": {
+                "all": "Semua"
+              },
+              "bookInfo": {
+                "playNow": "Main Sekarang",
+                "more": "Lebih banyak",
+                "viewMore": "Lihat lebih banyak",
+                "introduction": "Sinopsis",
+                "previousPage": "Halaman terakhir",
+                "nextPage": "Halaman selanjutnya",
+                "lastChapterTip": "Saat ini di halaman terakhir",
+                "firstChapterTip": "Saat ini di halaman pertama",
+                "like": "Anda mungkin suka",
+                "relatedEpisodes": "Drama Terkait",
+                "downloadTip": "Episode ini perlu diunduh agar bisa ditonton",
+                "episodesDownload": "Unduh Aplikasinya",
+                "episodes": "Episode",
+                "first": "Episode ",
+                "episode": "",
+                "recLike": "Direkomendasikan Untukmu",
+                "totalEpisodes": "Total Episode",
+                "episodeList": "Daftar Drama",
+                "share": "Bagikan",
+                "shareCopy": "Tautan telah ditempelkan ke papan klip Anda.",
+                "download": "Unduh",
+                "clickCopy": "Klik salin tautan",
+                "bookRemoved": "Drama telah dibatalkan. Turunkan aplikasi untuk menonton konten yang lebih menarik",
+                "episodesUnlockTip": "90% pengguna sudah membuka kunci",
+                "unlockFullSeries": "Buka Kunci Semua Episode",
+                "unlockNow": "Buka Sekarang"
+              },
+              "others": {
+                "error": "404 Maaf, halaman mengalami kesalahan"
+              },
+              "tag": {
+                "relevant": "Relevant popular keywords",
+                "relation1": "DramaBox has found related content about ",
+                "relation2": "for you.\nThis includes books related to ",
+                "relation3": ",\nas well as ",
+                "relation4": "related content information."
+              },
+              "banner": {
+                "OpenApp": "Lebih banyak konten menarik, hanya di DramaBox",
+                "Open": "Buka",
+                "GuideText": "Buka Aplikasi DramaBox",
+                "GuideOpen": "Buka"
+              },
+              "search": {
+                "tip": "Mencari",
+                "noReult": "Tidak ditemukan hasil yang relevan.",
+                "tryWatch": "Coba tonton 15 detik, unduh aplikasi untuk menonton episode lengkap.",
+                "resultTip1": "Ditemukan ",
+                "resultTip2": " hasil yang relevan dengan ",
+                "resultTip3": ""
+              },
+              "film": {
+                "openText": "Buka aplikasi\nuntuk menikmati layanan",
+                "getApp": "Dapatkan pengalaman aplikasi yang sepenuhnya",
+                "moreFun": "Tonton lebih banyak drama pendek di aplikasi dan nikmati fitur-fitur canggih",
+                "open": "Buka DramaBox",
+                "notNow": "Tidak sekarang",
+                "useApp": "Gunakan aplikasi untuk menikmati pemutaran otomatis drama pendek",
+                "nextSet": "Episode berikutnya"
+              },
+              "user": {
+                "openDramabox": "Buka Dramabox",
+                "login": "Login",
+                "logout": "Logout",
+                "loginSuccess": "Login berhasil",
+                "logoutSuccess": "Telah logout",
+                "logoutFail": "Gagal logout",
+                "googleLogin": "Login melalui Google",
+                "facebookLogin": "Login melalui Facebook",
+                "appleLogin": "Login melalui Apple",
+                "agreementTip": "Dengan login akun, Anda telah membaca dan menyetujui $terms$ & $privacy$ kami.",
+                "loginFail": "Gagal login, silakan coba lagi",
+                "loginBtnTip": "Preferensi %1$d%% pengguna",
+                "loginNickname": "Anonim",
+                "guest_user": "Pengunjung",
+                "account_transfer": "Migrasi Akun",
+                "account_migration_tip": "Terdeteksi bahwa akun {{accountName}} Anda saat ini terhubung sebagai akun pengunjung. Untuk menghindari hilangnya status keanggotaan, disarankan memindahkan hak pengunjung ke akun {{accountName}} Anda. <span class=\"package-text\">Paket yang telah Anda beli tetap dapat digunakan di akun {{accountName}}.</span>",
+                "link_now": "Tautkan",
+                "login_to_recharge": "Sudah punya akun? Login untuk isi ulang",
+                "guest_payment_success_tip": "Anda telah berhasil melakukan pembayaran melalui <span class=\"guest-text\">akun pengunjung</span>. Untuk menghindari hilangnya akun Anda, harap segera tautkan akun Anda.",
+                "vip_unlock_congratulations": "Selamat! Anda berhasil membuka akses VIP. Unduh aplikasi dan login ke akun ini untuk menonton 2000+ drama. Nikmati lebih banyak konten dan pengalaman menonton HD hanya di aplikasi!",
+                "download_now": "Segera Unduh",
+                "account_linked_successfully": "Berhasil ditautkan",
+                "confirm_transfer": "Konfirmasi Pemindahan",
+                "account_bind_success_tip": "Anda telah berhasil menautkan akun {{name}} Segera unduh aplikasi dan login ke akun Yuk, tonton lebih banyak konten berbayar!",
+                "online_customer_service": "Layanan Pelanggan"
+              },
+              "payment": {
+                "my_wallet": "Dompet",
+                "coins": "Koin",
+                "bonus": "Koin hadiah",
+                "balance": "Saldo: ",
+                "top_up": "Isi ulang",
+                "dramabox_membership": "Anggota dramabox",
+                "enjoy_a_vast": "Banyak drama pendek populer gratis ditonton",
+                "valid_until": "Berlaku hingga $$valid_until$$",
+                "enable_auto_renewal": "Aktifkan perpanjangan",
+                "renew_now": "Aktifkan sekarang",
+                "for_any_top": "Jika ada masalah terkait isi ulang, silakan unduh aplikasi untuk menghubungi layanan pelanggan dan menyelesaikannya",
+                "auto_renewal": "Perpanjangan otomatis",
+                "will_automatically": "Akan diperpanjang otomatis pada $$will_automatically$$",
+                "cancel_auto_renewal": "Nonaktifkan",
+                "enable_now": "Aktifkan sekarang",
+                "still_cancel_auto_renewal": "Apakah Anda yakin ingin menonaktifkan perpanjangan otomatis?",
+                "ill_think": "Saya pikirkan lagi",
+                "im_sure": "Saya sudah yakin",
+                "click_to_unlock": "Klik untuk membuka kunci video lengkap",
+                "unlock": "Buka kunci",
+                "platform_not_support": "Platform ini saat ini tidak didukung",
+                "unlock_episode_coins": "{{price}} koin untuk membuka episode ini",
+                "this_episode_50_Coins": "Episode ini: {{price}} koin",
+                "checking_payment_status": "Sedang memproses hasil pembayaran",
+                "do_not_close": "Jangan tutup atau segarkan halaman",
+                "payment_failed": "Pembayaran gagal, silakan coba lagi nanti",
+                "payment_successful": "Pembayaran berhasil",
+                "congratulations": "Selamat, Anda telah menjadi VIP, Anda dapat menonton drama pendek secara gratis setelah mengunduh aplikasi, data Anda akan disinkronkan setelah login ke akun Anda di aplikasi",
+                "successfully_purchased": "Selamat, Anda telah berhasil membeli koin, Anda dapat menonton drama pendek setelah mengunduh aplikasi, data Anda akan disinkronkan setelah login ke akun Anda di aplikasi",
+                "recharge_tips": "Penjelasan",
+                "purchase_failed": "Pembelian gagal",
+                "loading": "Sedang memuat...",
+                "membership": "ANGGOTA",
+                "manage_auto_renewal": "Kelola Perpanjangan Otomatis",
+                "already_close": "Dimatikan",
+                "store": "Toko",
+                "pay_now": "Bayar sekarang",
+                "payment_method": "Metode Pembayaran",
+                "loading_security_tip": "Verifikasi keamanan sedang berlangsung",
+                "users_picked": "97% pengguna memilih ini",
+                "click_to_login": "Klik untuk Masuk",
+                "vip_account_bind_tip": "<span class='vip-user'>Pengguna VIP</span> <div class='vip-tip'>untuk menghindari hilangnya akun Anda, harap segera tautkan akun Anda!</div>",
+                "paymentSuccess": "Pembayaran berhasil",
+                "downloadNow": "Unduh Sekarang",
+                "paidContentAppTip": "konten berbayar dapat ditonton setelah mengunduh aplikasi."
+              },
+              "retention": {
+                "special_offer": "Keuntungan Eksklusif",
+                "hot_title": "Sudah 1000+ pembelian"
+              },
+              "adsence": {
+                "closeAd": "Tutup Iklan",
+                "unlockHiddenRewards": "Ketuk untuk buka bonus tersembunyi"
+              },
+              "mainActor": {
+                "works": "Karya",
+                "cast": "Pemeran utama",
+                "genre": "Genre",
+                "titles": "{{count}} drama"
+              },
+              "subscription": {
+                "subscribeTrendingDramas": "Langganan push drama populer, Jangan lewatkan drama baru apa pun.",
+                "subscriptionSuccess": "Berhasil Berlangganan",
+                "subscriptionSuccessDetail": "Selamat, langganan berhasil. Kamu dapat mengakses situs kami langsung melalui email.Kami juga akan mengirimkan drama pendek populer secara berkala ke emailmu.",
+                "gotIt": "Mengerti",
+                "signIn": "Masuk Sekarang",
+                "loginPrompt": "Selangkah lagi login untuk berlangganan,Kami membutuhkan email Anda untuk mengirimkan update rutin drama pendek terpopuler.",
+                "emailPermissionAgreement": "Centang untuk menyetujui notifikasi melalui email",
+                "follow": "Ikuti"
+              }
+            }
+          },
+          "en": {
+            "common": {
+              "home": {
+                "home": "Home",
+                "recommend": "For You",
+                "resources": "Resources",
+                "browse": "Browse",
+                "app": "App",
+                "more": "More",
+                "privacyPolicy": "Privacy Policy",
+                "termsOfUse": "Terms of Use",
+                "allRightsReserved": "All Rights Reserved",
+                "play": "Play",
+                "back": "Back",
+                "email": "Email",
+                "emptyDesc": "It's empty!",
+                "episodes": "Episodes",
+                "about": "About",
+                "contact": "Contact Us",
+                "community": "Community",
+                "business": "Business Collaborations",
+                "joinUs": "Join Us"
+              },
+              "热门好剧": "Top Hits",
+              "必看好剧": "Must-sees",
+              "当前热播": "Trending",
+              "精彩剧集": "Hidden Gems",
+              "browse": {
+                "all": "All"
+              },
+              "bookInfo": {
+                "playNow": "Play Now",
+                "more": "more",
+                "viewMore": "View More",
+                "introduction": "Introduction",
+                "previousPage": "Previous page",
+                "nextPage": "Next page",
+                "lastChapterTip": "Already the last chapter",
+                "firstChapterTip": "Already the first chapter",
+                "like": "You may like",
+                "relatedEpisodes": "Related Episodes",
+                "downloadTip": "This episode needs to be downloaded to watch",
+                "episodesDownload": "Download The App",
+                "episodes": "Episodes",
+                "first": "Episode ",
+                "episode": "",
+                "recLike": "Recommended for you",
+                "totalEpisodes": "Total Episodes",
+                "episodeList": "Episode List",
+                "share": "Share",
+                "shareCopy": "The link has been pasted to your clipboard.",
+                "download": "Download",
+                "clickCopy": "Click to copy the link",
+                "bookRemoved": "The drama has been taken down, download the app to watch more exciting content",
+                "episodesUnlockTip": "90% of users have unlocked",
+                "unlockFullSeries": "Unlock Full Series",
+                "unlockNow": "Unlock Now"
+              },
+              "others": {
+                "error": "Oooops, 404 not found..."
+              },
+              "tag": {
+                "relevant": "Relevant popular keywords",
+                "relation1": "DramaBox has found related content about ",
+                "relation2": "for you.\nThis includes books related to ",
+                "relation3": ",\nas well as ",
+                "relation4": "related content information."
+              },
+              "banner": {
+                "OpenApp": "Open the DramaBox App for more wonderful short dramas",
+                "Open": "Open",
+                "GuideText": "Open DramaBox App",
+                "GuideOpen": "Open"
+              },
+              "search": {
+                "tip": "Search",
+                "noReult": "No results were found.",
+                "tryWatch": "Watch the first 15s, download the app for the full episode.",
+                "resultTip1": "",
+                "resultTip2": " results were found for ",
+                "resultTip3": ""
+              },
+              "film": {
+                "openText": "Open the app\nto experience the full range of services",
+                "getApp": "Get the full app experience",
+                "moreFun": "Watch more dramas and get a better experience on the app",
+                "open": "Open DramaBox",
+                "notNow": "Not now",
+                "useApp": "Use the app and experience a seamless connection between episodes",
+                "nextSet": "Next episode"
+              },
+              "user": {
+                "openDramabox": "Open DramaBox",
+                "login": "Log in",
+                "logout": "Log out",
+                "loginSuccess": "You're Logged In",
+                "logoutSuccess": "Logged out",
+                "logoutFail": "Logout failed",
+                "googleLogin": "Sign in with Google",
+                "facebookLogin": "Sign in with Facebook",
+                "appleLogin": "Sign in with Apple",
+                "agreementTip": "By continuing, you agree to our $terms$ & $privacy$.",
+                "loginFail": "Login failed, please try again",
+                "loginBtnTip": "%1$d%% users prefer",
+                "loginNickname": "Anonymous",
+                "guest_user": "Guest User",
+                "account_transfer": "Account Transfer",
+                "account_migration_tip": "<div class=\"migration-text\">We've detected that your account ({{accountName}}) is already linked to a guest account. To protect your membership, please transfer your guest data to this account.</div><span class=\"package-text\">Your current subscription will remain active on account ({{accountName}}).</span>",
+                "link_now": "Link Now",
+                "login_to_recharge": "Have an account? Log in to top up!",
+                "guest_payment_success_tip": "You've completed your payment as a <span class=\"guest-text\">guest</span>. To avoid losing your account, please link it now.",
+                "vip_unlock_congratulations": "Congratulations! You're now a VIP! Download the app and log in with your account to: Watch 2,000+ premium dramas Enjoy a high-definition viewing experience Explore more content and exclusive features — all in the app!",
+                "download_now": "Download Now",
+                "account_linked_successfully": "Account Linked Successfully",
+                "confirm_transfer": "Confirm Transfer",
+                "account_bind_success_tip": "Your account ({{name}}) is now linked. Download the app to log in. Enjoy more paid content now!",
+                "online_customer_service": "Feedback"
+              },
+              "payment": {
+                "my_wallet": "My Wallet",
+                "coins": "Coins",
+                "bonus": "Reward Coins",
+                "balance": "Balance: ",
+                "top_up": "Top Up",
+                "dramabox_membership": "DramaBox Membership",
+                "enjoy_a_vast": "Enjoy a vast library of popular short dramas for free",
+                "valid_until": "Valid until $$valid_until$$",
+                "enable_auto_renewal": "Enable Auto-Renewal",
+                "renew_now": "Activate Now",
+                "for_any_top": "For any top-up-related issues, please download the app and contact customer service.",
+                "auto_renewal": "Auto-Renewal",
+                "will_automatically": "Will automatically renew on $$will_automatically$$",
+                "cancel_auto_renewal": "Cancel Auto-Renewal",
+                "enable_now": "Enable Now",
+                "still_cancel_auto_renewal": "Are you sure you want to cancel auto-renewal?",
+                "ill_think": "I'll think about it",
+                "im_sure": "I'm sure",
+                "click_to_unlock": "Click to Unlock Full Video",
+                "unlock": "Unlock",
+                "platform_not_support": "This platform does not currently support this feature.",
+                "unlock_episode_coins": "Unlock this episode for {{price}} Coins",
+                "this_episode_50_Coins": "This episode: {{price}} Coins",
+                "checking_payment_status": "Checking payment status...",
+                "do_not_close": "Do not close or refresh the page.",
+                "payment_failed": "Payment failed. Please try again later.",
+                "payment_successful": "Payment successful!",
+                "congratulations": "Congratulations! You are now a VIP!\nYou can watch short dramas for free after downloading the app. Log in to your account on the app to sync your data.",
+                "successfully_purchased": "Congratulations! You have successfully purchased coins!\nYou can watch short dramas after downloading the app. Log in to your account on the app to sync your data.",
+                "recharge_tips": "Tips",
+                "purchase_failed": "Purchase failed",
+                "loading": "Loading...",
+                "membership": "MEMBERSHIP",
+                "manage_auto_renewal": "Manage auto-renewal",
+                "already_close": "Turned Off",
+                "store": "Store",
+                "pay_now": "Pay Now",
+                "payment_method": "Payment Method",
+                "loading_security_tip": "Security verification in progress",
+                "users_picked": "97% of users pick this",
+                "click_to_login": "Click to Login",
+                "vip_account_bind_tip": "<span class='vip-user'>VIP users</span> <div class='vip-tip'>please link your account now to avoid losing access!</div>",
+                "paymentSuccess": "Payment Successful",
+                "downloadNow": "Download the App",
+                "paidContentAppTip": "Paid content is available only in the app."
+              },
+              "retention": {
+                "special_offer": "Exclusive offer",
+                "hot_title": "1,000+ Sold"
+              },
+              "adsence": {
+                "closeAd": "Close Ad",
+                "unlockHiddenRewards": "Tap to unlock hidden rewards"
+              },
+              "mainActor": {
+                "works": "Works",
+                "cast": "Cast",
+                "genre": "Genre",
+                "titles": "{{count}} Titles"
+              },
+              "subscription": {
+                "subscribeTrendingDramas": "Turn on push notifications for trending dramas and never miss a new release",
+                "subscriptionSuccess": "All set. You're in!",
+                "subscriptionSuccessDetail": "You're all set! We'll keep you posted on the latest dramas via email, and you can access our site from your inbox anytime.",
+                "gotIt": "Got It",
+                "signIn": "Sign In",
+                "loginPrompt": "Almost there! Sign in so we can send you regular push updates on trending dramas via email.",
+                "emailPermissionAgreement": "Check to agree to receive updates via email",
+                "follow": "Follow"
+              }
+            }
+          }
+        },
+        "initialLocale": "in",
+        "ns": [
+          "common"
+        ],
+        "userConfig": {
+          "i18n": {
+            "defaultLocale": "en",
+            "locales": [
+              "en",
+              "zhHans",
+              "ko",
+              "zh",
+              "es",
+              "in",
+              "ja",
+              "de",
+              "fr",
+              "pt",
+              "ar",
+              "th",
+              "tl"
+            ],
+            "localeDetection": false
+          },
+          "react": {
+            "useSuspense": false
+          },
+          "localePath": "/storage/haiwai_dramaboxdb_ssr/public/locales",
+          "ns": [
+            "common",
+            "download"
+          ],
+          "reloadOnPrerender": false,
+          "interpolation": {
+            "escapeValue": false
+          },
+          "default": {
+            "i18n": {
+              "defaultLocale": "en",
+              "locales": [
+                "en",
+                "zhHans",
+                "ko",
+                "zh",
+                "es",
+                "in",
+                "ja",
+                "de",
+                "fr",
+                "pt",
+                "ar",
+                "th",
+                "tl"
+              ],
+              "localeDetection": false
+            },
+            "react": {
+              "useSuspense": false
+            },
+            "localePath": "/storage/haiwai_dramaboxdb_ssr/public/locales",
+            "ns": [
+              "common",
+              "download"
+            ],
+            "reloadOnPrerender": false,
+            "interpolation": {
+              "escapeValue": false
+            }
+          }
+        }
+      }
+    },
+    "__N_SSG": true
+  },
+  "page": "/",
+  "query": {},
+  "buildId": "dramaboxdb_prod_20251211",
+  "isFallback": false,
+  "isExperimentalCompile": false,
+  "gsp": true,
+  "locale": "in",
+  "locales": [
+    "en",
+    "zhHans",
+    "ko",
+    "zh",
+    "es",
+    "in",
+    "ja",
+    "de",
+    "fr",
+    "pt",
+    "ar",
+    "th",
+    "tl"
+  ],
+  "defaultLocale": "en",
+  "scriptLoader": []
+}

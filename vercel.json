@@ -1,0 +1,12 @@
+{
+    "rewrites": [
+        {
+            "source": "/api/dramabox/:path*",
+            "destination": "https://dramabox.sansekai.my.id/api/dramabox/:path*"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/index.html"
+        }
+    ]
+}

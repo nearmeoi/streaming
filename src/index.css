@@ -5,6 +5,10 @@
 body {
   @apply bg-background-light dark:bg-background-dark text-text-primary-light dark:text-white font-sans;
   overscroll-behavior-y: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* Sembunyikan scrollbar tapi tetap bisa scroll */

@@ -1,12 +1,9 @@
-// apiService.js - A utility to handle API requests with CORS bypass
+// apiService.js
 export const apiService = {
   async get(endpoint) {
     try {
-      // Using a CORS proxy service to bypass CORS restrictions
-      // Note: This is a workaround for client-side CORS issues
-      const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(`https://dramabox.sansekai.my.id${endpoint}`)}`;
-
-      const response = await fetch(proxyUrl, {
+      // Use relative path to leverage Vite proxy (dev) or Vercel rewrites (prod)
+      const response = await fetch(endpoint, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -18,36 +15,25 @@ export const apiService = {
       }
 
       const data = await response.json();
-
-      // The proxy service wraps the response, so we need to extract the actual content
-      if (data && data.contents) {
-        try {
-          // Parse the JSON content returned by the proxy service
-          return JSON.parse(data.contents);
-        } catch (parseError) {
-          console.error('Error parsing proxy response:', parseError);
-          throw parseError;
-        }
-      } else {
-        // If the proxy service format is different, try to return the content directly
-        return data;
-      }
+      return data;
     } catch (error) {
       console.error('API request failed:', error.message);
 
       // Provide fallback data structure to avoid breaking the UI
-      // This ensures the app remains functional even if the API is temporarily unavailable
       if (endpoint.includes('/api/dramabox/latest')) {
         return [];
       } else if (endpoint.includes('/api/dramabox/trending')) {
         return [];
       } else if (endpoint.includes('/api/dramabox/foryou')) {
         return [];
-      } else if (endpoint.includes('/api/dramabox/search')) {
+      } else if (endpoint.includes('/api/dramabox/search?query=')) {
         return [];
+      } else if (endpoint.includes('/api/dramabox/detail/')) {
+        return null;
+      } else if (endpoint.includes('/api/dramabox/play/')) {
+        return null;
       }
 
-      // If we don't have a specific fallback, return an empty array
       return [];
     }
   }

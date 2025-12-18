@@ -28,37 +28,77 @@ export const DataProvider = ({ children }) => {
         }
 
         try {
-            const [featuredData, trendingData] = await Promise.all([
-                apiService.get('/api/dramabox/latest'),
-                apiService.get('/api/dramabox/trending')
-            ]);
+            // New API returns sections array: [{ title, movies: [...] }, ...]
+            const sections = await apiService.get('/api/home?lang=in');
 
-            const newFeatured = featuredData && featuredData.length > 0 ? featuredData[0] : null;
+            // Extract movies from all sections
+            const allMovies = [];
+            if (Array.isArray(sections)) {
+                sections.forEach(section => {
+                    if (section.movies && Array.isArray(section.movies)) {
+                        section.movies.forEach(movie => {
+                            // Transform to expected format
+                            allMovies.push({
+                                bookId: movie.id,
+                                bookName: movie.title,
+                                coverWap: movie.poster,
+                                introduction: movie.description || '',
+                                tags: movie.genres || [],
+                                episodeCount: movie.episodeCount
+                            });
+                        });
+                    }
+                });
+            }
+
+            // First movie as featured, rest as trending
+            const newFeatured = allMovies.length > 0 ? allMovies[0] : null;
+            const trendingMovies = allMovies.slice(1);
+
             setFeatured(newFeatured);
-            setTrending(trendingData || []);
+            setTrending(trendingMovies);
             setIsHomeLoaded(true);
             setHomeError(null);
 
-            return { featured: newFeatured, trending: trendingData || [], error: null };
+            return { featured: newFeatured, trending: trendingMovies, error: null };
         } catch (err) {
             setHomeError(err.message);
             return { featured: null, trending: [], error: err.message };
         }
     }, [isHomeLoaded, featured, trending, homeError]);
 
-    // Fetch for you data only if not already loaded
+    // Fetch for you data - reuse home data since we don't have separate API
     const fetchForYouData = useCallback(async (forceRefresh = false) => {
         if (isForYouLoaded && !forceRefresh) {
             return { forYou, error: forYouError };
         }
 
         try {
-            const data = await apiService.get('/api/dramabox/foryou');
-            setForYou(data || []);
+            // Reuse home data transformation
+            const sections = await apiService.get('/api/home?lang=in');
+            const allMovies = [];
+            if (Array.isArray(sections)) {
+                sections.forEach(section => {
+                    if (section.movies && Array.isArray(section.movies)) {
+                        section.movies.forEach(movie => {
+                            allMovies.push({
+                                bookId: movie.id,
+                                bookName: movie.title,
+                                coverWap: movie.poster,
+                                introduction: movie.description || '',
+                                tags: movie.genres || [],
+                                episodeCount: movie.episodeCount
+                            });
+                        });
+                    }
+                });
+            }
+
+            setForYou(allMovies);
             setIsForYouLoaded(true);
             setForYouError(null);
 
-            return { forYou: data || [], error: null };
+            return { forYou: allMovies, error: null };
         } catch (err) {
             setForYouError(err.message);
             return { forYou: [], error: err.message };

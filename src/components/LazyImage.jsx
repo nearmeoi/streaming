@@ -42,7 +42,7 @@ const LazyImage = ({
             )}
 
             {/* Actual Image */}
-            {isInView && (
+            {isInView && src && (
                 <img
                     src={src}
                     alt={alt}

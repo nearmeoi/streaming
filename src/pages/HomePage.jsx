@@ -23,7 +23,7 @@ const HomePage = () => {
 
     if (loading && !isHomeLoaded) return (
         <div className={`pb-20 sm:pb-24 flex justify-center items-center h-64 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
-            <div className={darkMode ? 'text-white' : 'text-black'}>Loading...</div>
+            <div className={darkMode ? 'text-white' : 'text-black'}>Memuat...</div>
         </div>
     );
 
@@ -50,7 +50,7 @@ const HomePage = () => {
                     {/* Hero Content */}
                     <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col items-start">
                         <span className="bg-primary/90 text-white text-[10px] font-bold px-2 py-1 rounded-md mb-2 tracking-wider uppercase">
-                            Featured Drama
+                            Drama Unggulan
                         </span>
                         <h1 className="text-3xl sm:text-4xl font-black mb-2 text-white leading-tight drop-shadow-lg">
                             {featured.bookName}
@@ -63,8 +63,10 @@ const HomePage = () => {
                             state={{ drama: featured }}
                             className="w-full sm:w-auto bg-white text-black font-extrabold py-3.5 px-8 rounded-full flex items-center justify-center gap-2 shadow-xl hover:scale-105 transition-transform active:scale-95"
                         >
-                            <Play size={20} fill="currentColor" />
-                            <span>Watch Now</span>
+                            <span className="flex items-center gap-2">
+                                <Play size={20} fill="currentColor" />
+                                <span>Tonton Sekarang</span>
+                            </span>
                         </Link>
                     </div>
                 </div>
@@ -74,9 +76,9 @@ const HomePage = () => {
             <div className="px-6">
                 <div className="flex items-center justify-between mb-5">
                     <h2 className={`font-bold text-xl ${darkMode ? 'text-white' : 'text-black'} tracking-tight`}>
-                        Trending Now
+                        Sedang Tren
                     </h2>
-                    <span className="text-primary text-sm font-semibold">View All</span>
+                    <span className="text-primary text-sm font-semibold">Lihat Semua</span>
                 </div>
 
                 {trending.length > 0 ? (
@@ -112,7 +114,7 @@ const HomePage = () => {
                     </div>
                 ) : (
                     <div className="flex flex-col items-center justify-center py-12 text-gray-500">
-                        <p>No trending content available</p>
+                        <p>Konten tren tidak tersedia</p>
                     </div>
                 )}
             </div>

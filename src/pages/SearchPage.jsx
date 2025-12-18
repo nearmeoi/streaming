@@ -19,10 +19,20 @@ const SearchPage = () => {
         setLoading(true);
         setIsSearching(true);
         try {
-            const results = await apiService.get(`/api/dramabox/search?query=${encodeURIComponent(searchQuery)}`);
-            setSearchResults(results || []);
+            const results = await apiService.get(`/api/search?q=${encodeURIComponent(searchQuery)}`);
+            // Transform to expected format
+            const transformedResults = (results || []).map(item => ({
+                bookId: item.id,
+                bookName: item.title,
+                coverWap: item.poster,
+                introduction: item.description || '',
+                tags: item.genres || [],
+                episodeCount: item.episodeCount
+            }));
+            setSearchResults(transformedResults);
         } catch (error) {
             console.error("Search failed:", error);
+            setSearchResults([]);
         } finally {
             setLoading(false);
         }
@@ -38,14 +48,14 @@ const SearchPage = () => {
         <div className={`min-h-screen pb-24 ${darkMode ? 'bg-background-dark' : 'bg-background-light'}`}>
             {/* Sticky Header */}
             <div className={`sticky top-0 z-30 px-6 py-4 ${darkMode ? 'bg-background-dark/80' : 'bg-background-light/80'} backdrop-blur-xl border-b ${darkMode ? 'border-white/5' : 'border-black/5'}`}>
-                <h1 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>Discover</h1>
+                <h1 className={`text-2xl font-bold mb-4 ${darkMode ? 'text-white' : 'text-black'}`}>Temukan</h1>
                 <form onSubmit={handleSearch} className="relative">
                     <Search className={`absolute left-4 top-1/2 -translate-y-1/2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} size={20} />
                     <input
                         type="text"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search for CEO, Revenge..." // Subtly suggesting tags in placeholder
+                        placeholder="Cari CEO, Balas Dendam..." // Subtly suggesting tags in placeholder
                         className={`w-full rounded-2xl py-3.5 pl-12 pr-10 outline-none focus:ring-2 focus:ring-primary/50 transition-all font-medium 
                             ${darkMode
                                 ? 'bg-white/10 text-white placeholder-gray-400'
@@ -73,8 +83,8 @@ const SearchPage = () => {
                 ) : isSearching || searchResults.length > 0 ? (
                     <div>
                         <div className="flex justify-between items-center mb-4 mt-2">
-                            <h2 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Results for "{searchQuery}"</h2>
-                            <span className={`text-xs font-medium px-2 py-1 rounded-lg ${darkMode ? 'bg-white/10 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{searchResults.length} found</span>
+                            <h2 className={`font-bold text-lg ${darkMode ? 'text-white' : 'text-black'}`}>Hasil untuk "{searchQuery}"</h2>
+                            <span className={`text-xs font-medium px-2 py-1 rounded-lg ${darkMode ? 'bg-white/10 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{searchResults.length} ditemukan</span>
                         </div>
 
                         {searchResults.length > 0 ? (
@@ -100,7 +110,7 @@ const SearchPage = () => {
                         ) : (
                             <div className="text-center py-20 opacity-50">
                                 <Search size={48} className={`mx-auto mb-4 ${darkMode ? 'text-white' : 'text-black'}`} />
-                                <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>No results found</p>
+                                <p className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Hasil tidak ditemukan</p>
                             </div>
                         )}
                     </div>
@@ -111,7 +121,7 @@ const SearchPage = () => {
                             <Search size={48} className={darkMode ? 'text-white' : 'text-black'} />
                         </div>
                         <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                            Type to search for your favorite dramas
+                            Ketik untuk mencari drama favoritmu
                         </p>
                     </div>
                 )}

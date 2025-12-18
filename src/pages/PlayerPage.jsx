@@ -12,30 +12,36 @@ const PlayerPage = () => {
     const [progress, setProgress] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [currentEpisode, setCurrentEpisode] = useState(1);
+    const [currentEpisodeIndex, setCurrentEpisodeIndex] = useState(0);
     const [drama, setDrama] = useState(location.state?.drama || null);
+    const [episodes, setEpisodes] = useState([]);
     const [videoUrl, setVideoUrl] = useState(null);
     const [loading, setLoading] = useState(!drama);
+    const [videoLoading, setVideoLoading] = useState(false);
     const [showEpisodes, setShowEpisodes] = useState(false);
     const [showControls, setShowControls] = useState(true);
     const videoRef = useRef(null);
     const controlsTimeoutRef = useRef(null);
 
-    // If drama data wasn't passed via state, try to fetch it
+    // Fetch drama details and episodes list
     useEffect(() => {
         const fetchDrama = async () => {
-            if (drama) {
-                setLoading(false);
-                return;
-            }
-
             if (!bookId) return;
 
             setLoading(true);
             try {
-                const data = await apiService.get(`/api/dramabox/detail/${bookId}`);
+                const data = await apiService.get(`/api/detail/${bookId}`);
                 if (data) {
-                    setDrama(data);
+                    // Transform to expected format
+                    setDrama({
+                        bookId: data.id || bookId,
+                        bookName: data.title,
+                        coverWap: data.poster,
+                        introduction: data.description,
+                        tags: data.genres || [],
+                        totalEp: data.episodeCount || (data.episodes?.length || 0)
+                    });
+                    setEpisodes(data.episodes || []);
                 }
             } catch (error) {
                 console.error("Failed to fetch drama:", error);
@@ -45,25 +51,31 @@ const PlayerPage = () => {
         };
 
         fetchDrama();
-    }, [bookId, drama]);
+    }, [bookId]);
 
     // Fetch video URL when episode changes
     useEffect(() => {
         const fetchVideo = async () => {
-            if (!bookId) return;
+            if (!bookId || episodes.length === 0) return;
 
+            const currentEp = episodes[currentEpisodeIndex];
+            if (!currentEp) return;
+
+            setVideoLoading(true);
             try {
-                const data = await apiService.get(`/api/dramabox/play/${bookId}/${currentEpisode}`);
-                if (data && data.playUrl) {
-                    setVideoUrl(data.playUrl);
+                const data = await apiService.get(`/api/play/${bookId}/${currentEp.id}`);
+                if (data && data.videoUrl) {
+                    setVideoUrl(data.videoUrl);
                 }
             } catch (error) {
                 console.error("Failed to fetch video:", error);
+            } finally {
+                setVideoLoading(false);
             }
         };
 
         fetchVideo();
-    }, [bookId, currentEpisode]);
+    }, [bookId, currentEpisodeIndex, episodes]);
 
     // Save to history when drama loads
     useEffect(() => {
@@ -72,7 +84,7 @@ const PlayerPage = () => {
                 bookId: bookId,
                 title: drama.bookName || drama.title,
                 cover: drama.coverWap || drama.cover,
-                episode: currentEpisode,
+                episode: currentEpisodeIndex + 1,
                 progress: progress
             });
         }
@@ -82,7 +94,7 @@ const PlayerPage = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             if (isPlaying && drama) {
-                historyService.updateProgress(bookId, progress, currentEpisode);
+                historyService.updateProgress(bookId, progress, currentEpisodeIndex + 1);
             }
         }, 10000);
 
@@ -153,10 +165,11 @@ const PlayerPage = () => {
         return `${mins}:${secs.toString().padStart(2, '0')}`;
     };
 
-    const changeEpisode = (ep) => {
-        setCurrentEpisode(ep);
+    const changeEpisode = (index) => {
+        setCurrentEpisodeIndex(index);
         setProgress(0);
         setCurrentTime(0);
+        setVideoUrl(null);
         setShowEpisodes(false);
         setIsPlaying(false);
     };
@@ -229,13 +242,13 @@ const PlayerPage = () => {
                             onClick={() => setShowEpisodes(!showEpisodes)}
                             className="bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-lg text-sm font-semibold flex items-center gap-2 mb-3"
                         >
-                            Episode {currentEpisode}
+                            Episode {currentEpisodeIndex + 1}
                             <ChevronDown size={16} className={`transform transition-transform ${showEpisodes ? 'rotate-180' : ''}`} />
                         </button>
 
                         {/* Description */}
                         <p className="text-sm opacity-80 line-clamp-2 leading-relaxed">
-                            {drama?.introduction || "Loading description..."}
+                            {drama?.introduction || "Memuat deskripsi..."}
                         </p>
                     </div>
 
@@ -243,16 +256,16 @@ const PlayerPage = () => {
                     {showEpisodes && (
                         <div className="mb-4 bg-black/70 backdrop-blur-sm rounded-xl p-3 max-h-40 overflow-y-auto">
                             <div className="grid grid-cols-5 gap-2">
-                                {Array.from({ length: drama?.totalEp || 50 }, (_, i) => i + 1).map((ep) => (
+                                {episodes.map((ep, index) => (
                                     <button
-                                        key={ep}
-                                        onClick={() => changeEpisode(ep)}
-                                        className={`py-2.5 rounded-lg text-sm font-bold transition-colors ${ep === currentEpisode
-                                                ? 'bg-primary text-white'
-                                                : 'bg-white/10 hover:bg-white/20'
+                                        key={ep.id}
+                                        onClick={() => changeEpisode(index)}
+                                        className={`py-2.5 rounded-lg text-sm font-bold transition-colors ${index === currentEpisodeIndex
+                                            ? 'bg-primary text-white'
+                                            : 'bg-white/10 hover:bg-white/20'
                                             }`}
                                     >
-                                        {ep}
+                                        {ep.number || index + 1}
                                     </button>
                                 ))}
                             </div>

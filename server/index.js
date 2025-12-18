@@ -132,6 +132,7 @@ app.listen(PORT, () => {
 ║     DramaboxDB Scraper API Server Started        ║
 ╠══════════════════════════════════════════════════╣
 ║  Port: ${PORT}                                        ║
+║  Version: 2.1 (Resilient Scraper)                ║
 ║  Time: ${new Date().toISOString()}    ║
 ╠══════════════════════════════════════════════════╣
 ║  Endpoints:                                      ║

@@ -112,9 +112,9 @@ const HomePage = () => {
 
                 {trending.length > 0 ? (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-4 gap-y-6">
-                        {trending.map((drama) => (
+                        {trending.map((drama, index) => (
                             <Link
-                                key={drama.bookId}
+                                key={drama.bookId || `trending-${index}`}
                                 to={`/player/${drama.bookId}`}
                                 state={{ drama: drama }}
                                 className="group flex flex-col gap-2"

@@ -20,20 +20,33 @@ export const DataProvider = ({ children }) => {
     const [isForYouLoaded, setIsForYouLoaded] = useState(false);
     const [homeError, setHomeError] = useState(null);
     const [forYouError, setForYouError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
-    // Fetch home data only if not already loaded
+    // Fetch home data - uses HippoReels API with scraper fallback
     const fetchHomeData = useCallback(async (forceRefresh = false) => {
         if (isHomeLoaded && !forceRefresh) {
             return { featured, trending, error: homeError };
         }
 
-        try {
-            // New API returns sections array: [{ title, movies: [...] }, ...]
-            const sections = await apiService.get('/api/home?lang=in');
+        setIsLoading(true);
 
-            // Extract movies from all sections and deduplicate
-            const movieMap = new Map();
-            if (Array.isArray(sections)) {
+        try {
+            console.log('[DataContext] Fetching home data...');
+
+            // apiService.getHome() tries HippoReels first, then falls back to scraper
+            const movies = await apiService.getHome();
+
+            let allMovies = [];
+
+            // Handle different response formats
+            if (Array.isArray(movies)) {
+                // Direct array of movies (HippoReels format after transform)
+                allMovies = movies;
+            } else if (movies?.sections || Array.isArray(movies)) {
+                // Scraper format with sections
+                const sections = movies.sections || movies;
+                const movieMap = new Map();
+
                 sections.forEach(section => {
                     if (section.movies && Array.isArray(section.movies)) {
                         section.movies.forEach(movie => {
@@ -50,62 +63,53 @@ export const DataProvider = ({ children }) => {
                         });
                     }
                 });
+
+                allMovies = Array.from(movieMap.values());
             }
 
-            const allMovies = Array.from(movieMap.values());
+            console.log(`[DataContext] Got ${allMovies.length} movies`);
 
             // First movie as featured, rest as trending
             const newFeatured = allMovies.length > 0 ? allMovies[0] : null;
-            const trendingMovies = allMovies.slice(1);
+            const trendingMovies = allMovies.slice(1, 20); // Limit to 20 for performance
 
             setFeatured(newFeatured);
             setTrending(trendingMovies);
             setIsHomeLoaded(true);
             setHomeError(null);
+            setIsLoading(false);
 
             return { featured: newFeatured, trending: trendingMovies, error: null };
         } catch (err) {
+            console.error('[DataContext] Home fetch error:', err.message);
             setHomeError(err.message);
+            setIsLoading(false);
             return { featured: null, trending: [], error: err.message };
         }
     }, [isHomeLoaded, featured, trending, homeError]);
 
-    // Fetch for you data - reuse home data since we don't have separate API
+    // Fetch for you data - reuse home data
     const fetchForYouData = useCallback(async (forceRefresh = false) => {
         if (isForYouLoaded && !forceRefresh) {
             return { forYou, error: forYouError };
         }
 
         try {
-            // Reuse home data transformation and deduplicate
-            const sections = await apiService.get('/api/home?lang=in');
-            const movieMap = new Map();
-            if (Array.isArray(sections)) {
-                sections.forEach(section => {
-                    if (section.movies && Array.isArray(section.movies)) {
-                        section.movies.forEach(movie => {
-                            if (!movieMap.has(movie.id)) {
-                                movieMap.set(movie.id, {
-                                    bookId: movie.id,
-                                    bookName: movie.title,
-                                    coverWap: movie.poster,
-                                    introduction: movie.description || '',
-                                    tags: movie.genres || [],
-                                    episodeCount: movie.episodeCount
-                                });
-                            }
-                        });
-                    }
-                });
+            const movies = await apiService.getHome();
+
+            let allMovies = [];
+            if (Array.isArray(movies)) {
+                allMovies = movies;
             }
 
-            const allMovies = Array.from(movieMap.values());
+            // Shuffle for "For You" feel
+            const shuffled = [...allMovies].sort(() => Math.random() - 0.5);
 
-            setForYou(allMovies);
+            setForYou(shuffled.slice(0, 30)); // Limit to 30
             setIsForYouLoaded(true);
             setForYouError(null);
 
-            return { forYou: allMovies, error: null };
+            return { forYou: shuffled, error: null };
         } catch (err) {
             setForYouError(err.message);
             return { forYou: [], error: err.message };
@@ -129,6 +133,7 @@ export const DataProvider = ({ children }) => {
             forYou,
             isHomeLoaded,
             isForYouLoaded,
+            isLoading,
             homeError,
             forYouError,
             fetchHomeData,

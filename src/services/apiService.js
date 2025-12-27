@@ -1,12 +1,13 @@
-// apiService.js - Modified to use our local DramaBoxDB API server
+// apiService.js - Updated to use HippoReels API
+const API_BASE = ''; // Vite proxy handles routing to backend
+
 export const apiService = {
   async get(endpoint) {
-    // Our local API server that scrapes DramaBoxDB
-    const localApiUrl = `http://localhost:5000${endpoint}`;
+    const fullUrl = `${API_BASE}${endpoint}`;
 
     try {
-      console.log(`Fetching from local API: ${localApiUrl}`);
-      const response = await fetch(localApiUrl, {
+      console.log(`[API] Fetching: ${fullUrl}`);
+      const response = await fetch(fullUrl, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -15,12 +16,12 @@ export const apiService = {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.error || `HTTP error! status: ${response.status}`);
+        throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
       }
 
       const data = await response.json();
 
-      // Handle new API response format { success, data, error }
+      // Handle { success, data } format from HippoReels endpoints
       if (data.success !== undefined) {
         if (!data.success) {
           throw new Error(data.error || 'API request failed');
@@ -30,115 +31,112 @@ export const apiService = {
 
       return data;
     } catch (error) {
-      console.error('Local API request failed:', error.message);
-
-      // Fallback to original proxy approach if local API fails
-      console.log('Falling back to proxy services...');
-
-      // Function to fetch from a specific proxy with timeout
-      const fetchWithTimeout = async (proxyUrl, timeoutMs = 5000) => {
-        const timeoutPromise = new Promise((_, reject) => {
-          setTimeout(() => reject(new Error(`Request timeout after ${timeoutMs}ms`)), timeoutMs);
-        });
-
-        const fetchPromise = fetch(proxyUrl, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        });
-
-        return Promise.race([fetchPromise, timeoutPromise]);
-      };
-
-      // List of proxy services to try
-      const proxyServices = [
-        {
-          name: 'api.allorigins',
-          url: `https://api.allorigins.win/get?url=${encodeURIComponent(`https://dramabox.sansekai.my.id${endpoint}`)}`
-        },
-        {
-          name: 'corsproxy',
-          url: `https://corsproxy.io/?${encodeURIComponent(`https://dramabox.sansekai.my.id${endpoint}`)}`
-        }
-      ];
-
-      // Try each proxy service
-      for (const proxy of proxyServices) {
-        try {
-          console.log(`Trying ${proxy.name} proxy for ${endpoint}...`);
-          const response = await fetch(proxy.url, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            }
-          });
-
-          if (!response.ok) {
-            console.warn(`${proxy.name} proxy response not OK: ${response.status} ${response.statusText}`);
-            continue; // Try next proxy
-          }
-
-          const data = await response.json();
-
-          // Handle response based on proxy service
-          if (proxy.name === 'api.allorigins' && data && data.contents) {
-            try {
-              // Parse the JSON content returned by allorigins proxy service
-              return JSON.parse(data.contents);
-            } catch (parseError) {
-              console.error('Error parsing allorigins response:', parseError);
-              console.error('Raw allorigins response:', data.contents);
-              continue; // Try next proxy
-            }
-          } else if (proxy.name === 'corsproxy') {
-            // corsproxy returns the content directly
-            return data;
-          } else {
-            // Fallback handling
-            if (data && data.contents) {
-              return JSON.parse(data.contents);
-            }
-            return data;
-          }
-        } catch (error) {
-          console.warn(`${proxy.name} proxy failed:`, error.message);
-          continue; // Try next proxy
-        }
-      }
-
-      console.error('All proxy services failed for endpoint:', endpoint);
-
-      // Provide fallback data structure to avoid breaking the UI
-      if (endpoint.includes('/api/dramabox/latest')) {
-        return [];
-      } else if (endpoint.includes('/api/dramabox/trending')) {
-        return [];
-      } else if (endpoint.includes('/api/dramabox/foryou')) {
-        return [];
-      } else if (endpoint.includes('/api/dramabox/search')) {
-        return [];
-      }
-
-      // If we don't have a specific fallback, return an empty array
-      return [];
+      console.error('[API] Request failed:', error.message);
+      throw error;
     }
   },
 
-  // Helper methods for specific endpoints
+  // ==================== HIPPOREELS API ====================
+
+  /**
+   * Get home portal data (portal 1003 contains movie listings)
+   */
+  async getHippoHome() {
+    const data = await this.get('/api/hippo/portal/1003');
+    return this.transformHippoData(data);
+  },
+
+  /**
+   * Get portal by ID
+   * @param {number} portalId - Portal ID (1000, 1001, 1003, etc.)
+   */
+  async getHippoPortal(portalId) {
+    const data = await this.get(`/api/hippo/portal/${portalId}`);
+    return data;
+  },
+
+  /**
+   * Transform HippoReels API response to match our app format
+   */
+  transformHippoData(hippoResponse) {
+    const movies = [];
+
+    // HippoReels returns data in channelList with nested bookList
+    if (hippoResponse?.data?.channelList) {
+      const channels = hippoResponse.data.channelList;
+
+      channels.forEach(channel => {
+        if (channel.bookList && Array.isArray(channel.bookList)) {
+          channel.bookList.forEach(book => {
+            movies.push({
+              bookId: book.bookId || book.id,
+              bookName: book.bookName || book.name || book.title,
+              coverWap: book.coverWap || book.cover || book.poster,
+              introduction: book.introduction || book.desc || '',
+              tags: book.tags || [],
+              episodeCount: book.chapterCount || book.episodeCount || 0,
+              score: book.score || 0,
+              viewCount: book.readNumber || 0,
+              // Keep original data for reference
+              _raw: book
+            });
+          });
+        }
+      });
+    }
+
+    return movies;
+  },
+
+  // ==================== LEGACY API (Scraper fallback) ====================
+
   async getHome() {
-    return this.get('/api/dramabox/trending');
+    try {
+      // Try HippoReels first
+      const movies = await this.getHippoHome();
+      if (movies && movies.length > 0) {
+        console.log(`[API] Got ${movies.length} movies from HippoReels`);
+        return movies;
+      }
+    } catch (err) {
+      console.warn('[API] HippoReels failed, trying scraper...', err.message);
+    }
+
+    // Fallback to scraper
+    return this.get('/api/home?lang=in');
   },
 
   async search(query) {
-    return this.get(`/api/dramabox/search?query=${encodeURIComponent(query)}`);
+    // Scraper endpoint (HippoReels search needs different implementation)
+    return this.get(`/api/search?q=${encodeURIComponent(query)}`);
   },
 
   async getDetail(movieId) {
-    return this.get(`/api/dramabox/detail/${movieId}`);
+    return this.get(`/api/detail/${movieId}`);
   },
 
   async getVideoUrl(movieId, episodeId) {
-    return this.get(`/api/dramabox/episode/${movieId}/${episodeId}`);
+    return this.get(`/api/play/${movieId}/${episodeId}`);
+  },
+
+  // ==================== SIGNATURE MANAGEMENT ====================
+
+  /**
+   * Update HippoReels signatures
+   */
+  async updateSignatures(ft, xhel, xss) {
+    const response = await fetch(`${API_BASE}/api/hippo/update-signatures`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ft, xhel, xss })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update signatures');
+    }
+
+    return response.json();
   }
 };

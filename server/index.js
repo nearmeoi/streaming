@@ -2,9 +2,10 @@
 import express from 'express';
 import cors from 'cors';
 import { getHomePage, searchMovies, getMovieDetail, getVideoUrl } from './scraper.js';
+import hippoReels from './hipporeels.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Middleware
 app.use(cors({
@@ -104,6 +105,59 @@ app.get('/api/play/:movieId/:episodeId', async (req, res) => {
     }
 });
 
+// ============== HIPPOREELS API ENDPOINTS ==============
+
+/**
+ * GET /api/hippo/portal/:portalId
+ * Generic endpoint for any HippoReels portal
+ */
+app.get('/api/hippo/portal/:portalId', async (req, res) => {
+    try {
+        const { portalId } = req.params;
+        console.log(`[HippoReels] Fetching portal ${portalId}...`);
+        const result = await hippoReels.getPortal(parseInt(portalId), {});
+        res.json(result);
+    } catch (error) {
+        console.error('Error in /api/hippo/portal:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * GET /api/hippo/home
+ * Get HippoReels home config (portal 1000)
+ */
+app.get('/api/hippo/home', async (req, res) => {
+    try {
+        const result = await hippoReels.getHomeConfig();
+        res.json(result);
+    } catch (error) {
+        console.error('Error in /api/hippo/home:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * POST /api/hippo/update-signatures
+ * Update the API signatures when they expire
+ */
+app.post('/api/hippo/update-signatures', (req, res) => {
+    try {
+        const { ft, xhel, xss } = req.body;
+        if (!ft || !xhel || !xss) {
+            return res.status(400).json({
+                success: false,
+                error: 'Missing required fields: ft, xhel, xss'
+            });
+        }
+        hippoReels.updateSignatures(ft, xhel, xss);
+        res.json({ success: true, message: 'Signatures updated successfully' });
+    } catch (error) {
+        console.error('Error updating signatures:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
 // Fallback for undefined routes
 app.use((req, res) => {
     res.status(404).json({
@@ -114,7 +168,11 @@ app.use((req, res) => {
             'GET /api/home',
             'GET /api/search?q={query}',
             'GET /api/detail/:movieId',
-            'GET /api/play/:movieId/:episodeId'
+            'GET /api/play/:movieId/:episodeId',
+            '--- HippoReels API ---',
+            'GET /api/hippo/home',
+            'GET /api/hippo/portal/:portalId',
+            'POST /api/hippo/update-signatures'
         ]
     });
 });
@@ -129,18 +187,23 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
     console.log(`
 ╔══════════════════════════════════════════════════╗
-║     DramaboxDB Scraper API Server Started        ║
+║     DramaboxDB + HippoReels API Server           ║
 ╠══════════════════════════════════════════════════╣
 ║  Port: ${PORT}                                        ║
-║  Version: 2.1 (Resilient Scraper)                ║
+║  Version: 3.0 (+ HippoReels Direct API)          ║
 ║  Time: ${new Date().toISOString()}    ║
 ╠══════════════════════════════════════════════════╣
-║  Endpoints:                                      ║
+║  Scraper Endpoints:                              ║
 ║  - GET /api/health                               ║
 ║  - GET /api/home                                 ║
 ║  - GET /api/search?q={query}                     ║
 ║  - GET /api/detail/:movieId                      ║
 ║  - GET /api/play/:movieId/:episodeId             ║
+╠══════════════════════════════════════════════════╣
+║  HippoReels Direct API:                          ║
+║  - GET /api/hippo/home                           ║
+║  - GET /api/hippo/portal/:portalId               ║
+║  - POST /api/hippo/update-signatures             ║
 ╚══════════════════════════════════════════════════╝
   `);
 });

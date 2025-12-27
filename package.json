@@ -8,8 +8,9 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api": "cd ../DramaBox-API && npm run api",
-    "both": "concurrently \"npm run api\" \"vite\""
+    "server": "node server/index.js",
+    "api": "node server/index.js",
+    "start": "concurrently \"npm run server\" \"npm run dev\""
   },
   "dependencies": {
     "clsx": "^2.1.1",

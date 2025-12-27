@@ -6,15 +6,11 @@ export default defineConfig({
   plugins: [react()],
   server: {
     port: 3000,
+    strictPort: true,
     host: true,
     proxy: {
-      '/api/dramabox': {
-        target: 'http://localhost:5000',
-        changeOrigin: true,
-        secure: false,
-      },
-      '/api/drama': {
-        target: 'http://localhost:5000',
+      '/api': {
+        target: 'http://localhost:3002',
         changeOrigin: true,
         secure: false,
       }

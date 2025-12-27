@@ -26,15 +26,30 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
+// External API base URL
+const EXTERNAL_API = 'https://dramabox-api-rho.vercel.app';
+
+/**
+ * Proxy helper function
+ */
+async function proxyRequest(endpoint) {
+    const url = `${EXTERNAL_API}${endpoint}`;
+    console.log(`[Proxy] Fetching: ${url}`);
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`API Error: ${response.status}`);
+    }
+    return response.json();
+}
+
 /**
  * GET /api/home
- * Returns homepage sections (trending, must-sees, etc.)
+ * Proxy to external API for homepage data
  */
 app.get('/api/home', async (req, res) => {
     try {
-        const lang = req.query.lang || 'in';
-        const result = await getHomePage(lang);
-        res.json(result);
+        const data = await proxyRequest('/api/home');
+        res.json(data);
     } catch (error) {
         console.error('Error in /api/home:', error);
         res.status(500).json({ success: false, error: error.message, data: [] });
@@ -43,17 +58,16 @@ app.get('/api/home', async (req, res) => {
 
 /**
  * GET /api/search?q={query}
- * Search movies by keyword
+ * Proxy to external API for search
  */
 app.get('/api/search', async (req, res) => {
     try {
         const query = req.query.q || req.query.query || '';
-        const lang = req.query.lang || 'in';
         if (!query) {
             return res.status(400).json({ success: false, error: 'Query required', data: [] });
         }
-        const result = await searchMovies(query, lang);
-        res.json(result);
+        const data = await proxyRequest(`/api/search?q=${encodeURIComponent(query)}`);
+        res.json(data);
     } catch (error) {
         console.error('Error in /api/search:', error);
         res.status(500).json({ success: false, error: error.message, data: [] });
@@ -62,17 +76,13 @@ app.get('/api/search', async (req, res) => {
 
 /**
  * GET /api/detail/:movieId
- * Get movie details and episode list
+ * Proxy to external API for movie details
  */
 app.get('/api/detail/:movieId', async (req, res) => {
     try {
         const { movieId } = req.params;
-        const lang = req.query.lang || 'in';
-        if (!movieId) {
-            return res.status(400).json({ success: false, error: 'Movie ID required', data: null });
-        }
-        const result = await getMovieDetail(movieId, lang);
-        res.json(result);
+        const data = await proxyRequest(`/api/detail/${movieId}/v2`);
+        res.json(data);
     } catch (error) {
         console.error('Error in /api/detail:', error);
         res.status(500).json({ success: false, error: error.message, data: null });
@@ -80,25 +90,48 @@ app.get('/api/detail/:movieId', async (req, res) => {
 });
 
 /**
- * GET /api/play/:movieId/:episodeId
- * Get video URL for specific episode (uses Puppeteer)
+ * GET /api/stream?bookId=X&episode=Y
+ * Proxy to external API for video stream URL
+ */
+app.get('/api/stream', async (req, res) => {
+    try {
+        const { bookId, episode } = req.query;
+        if (!bookId || !episode) {
+            return res.status(400).json({ success: false, error: 'bookId and episode required' });
+        }
+        const data = await proxyRequest(`/api/stream?bookId=${bookId}&episode=${episode}`);
+        res.json(data);
+    } catch (error) {
+        console.error('Error in /api/stream:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * GET /api/play/:movieId/:episodeId (Legacy - redirect to stream)
+ * For backward compatibility
  */
 app.get('/api/play/:movieId/:episodeId', async (req, res) => {
     try {
         const { movieId, episodeId } = req.params;
-        const lang = req.query.lang || 'in';
-        if (!movieId || !episodeId) {
-            return res.status(400).json({ success: false, error: 'Movie ID and Episode ID required', data: null });
-        }
+        // episodeId could be a number or chapterId, try to use it as episode number
+        const episode = parseInt(episodeId) || 1;
+        const data = await proxyRequest(`/api/stream?bookId=${movieId}&episode=${episode}`);
 
-        console.log(`Fetching video for movie ${movieId}, episode ${episodeId} (lang: ${lang})...`);
-        const result = await getVideoUrl(movieId, episodeId, lang);
+        // Transform to expected format
+        const chapter = data?.data?.chapter;
+        const video = chapter?.video;
 
-        if (!result.success) {
-            return res.status(404).json(result);
-        }
-
-        res.json(result);
+        res.json({
+            success: true,
+            data: {
+                movieId,
+                episodeId,
+                episodeNumber: episode,
+                videoUrl: video?.m3u8 || video?.mp4,
+                allVideoUrls: [video?.m3u8, video?.mp4].filter(Boolean)
+            }
+        });
     } catch (error) {
         console.error('Error in /api/play:', error);
         res.status(500).json({ success: false, error: error.message, data: null });
@@ -133,6 +166,83 @@ app.get('/api/hippo/home', async (req, res) => {
         res.json(result);
     } catch (error) {
         console.error('Error in /api/hippo/home:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * GET /api/hippo/book/:bookId
+ * Get book detail and chapters using portal 1040
+ */
+app.get('/api/hippo/book/:bookId', async (req, res) => {
+    try {
+        const { bookId } = req.params;
+        console.log(`[HippoReels] Fetching book detail for ${bookId} via portal 1040...`);
+        const result = await hippoReels.getPortal(1040, { bookId });
+        res.json(result);
+    } catch (error) {
+        console.error('Error in /api/hippo/book:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * GET /api/hippo/chapter/:chapterId
+ * Get chapter/episode video URL
+ */
+app.get('/api/hippo/chapter/:chapterId', async (req, res) => {
+    try {
+        const { chapterId } = req.params;
+        const { bookId } = req.query;
+        console.log(`[HippoReels] Fetching chapter ${chapterId} for book ${bookId}...`);
+        // Try portal 1040 with chapterId or find the right endpoint
+        const result = await hippoReels.getPortal(1040, { bookId, chapterId });
+        res.json(result);
+    } catch (error) {
+        console.error('Error in /api/hippo/chapter:', error);
+        res.status(500).json({ success: false, error: error.message, data: null });
+    }
+});
+
+/**
+ * GET /api/hippo/play/:bookId/:chapterId
+ * Get video URL using portal 1008 (returns mp4720p direct URLs)
+ */
+app.get('/api/hippo/play/:bookId/:chapterId', async (req, res) => {
+    try {
+        const { bookId, chapterId } = req.params;
+        console.log(`[HippoReels] Fetching video for book ${bookId}, chapter ${chapterId} via portal 1008...`);
+
+        const result = await hippoReels.getPortal(1008, { bookId, chapterId });
+
+        if (result.success && result.data?.data?.chapterContentList) {
+            const chapters = result.data.data.chapterContentList;
+            const targetChapter = chapters.find(ch => ch.chapterId === chapterId);
+
+            if (targetChapter && targetChapter.mp4720p) {
+                res.json({
+                    success: true,
+                    data: {
+                        bookId,
+                        chapterId,
+                        chapterName: targetChapter.chapterName,
+                        videoUrl: targetChapter.mp4720p,
+                        thumbnail: targetChapter.chapterImg,
+                        allChapters: chapters.map(ch => ({
+                            chapterId: ch.chapterId,
+                            chapterName: ch.chapterName,
+                            videoUrl: ch.mp4720p,
+                            thumbnail: ch.chapterImg
+                        }))
+                    }
+                });
+                return;
+            }
+        }
+
+        res.json(result);
+    } catch (error) {
+        console.error('Error in /api/hippo/play:', error);
         res.status(500).json({ success: false, error: error.message, data: null });
     }
 });

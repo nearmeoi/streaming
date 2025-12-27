@@ -42,7 +42,7 @@ const PlayerPage = () => {
     const videoRef = useRef(null);
     const hlsRef = useRef(null);
     const controlsTimeoutRef = useRef(null);
-    const isChangingEpisodeRef = useRef(false);
+    const [retryCounter, setRetryCounter] = useState(0);
 
     // Sync isPlaying with DOM events
     useEffect(() => {
@@ -74,7 +74,7 @@ const PlayerPage = () => {
             setLoading(true);
             setVideoError(null);
             try {
-                const data = await apiService.get(`/api/detail/${bookId}`);
+                const data = await apiService.getDetail(bookId);
                 if (data) {
                     setDrama({
                         bookId: data.id || bookId,
@@ -96,34 +96,42 @@ const PlayerPage = () => {
         fetchDrama();
     }, [bookId]);
 
-    // Fetch video URL
-    const fetchVideo = async () => {
-        if (!bookId || episodes.length === 0 || isChangingEpisodeRef.current) return;
-
-        const currentEp = episodes[currentEpisodeIndex];
-        if (!currentEp) return;
-
-        setVideoLoading(true);
-        setVideoError(null);
-
-        try {
-            const data = await apiService.get(`/api/play/${bookId}/${currentEp.id}`);
-            if (data && data.videoUrl) {
-                setVideoUrl(data.videoUrl);
-            } else {
-                setVideoError("Video tidak ditemukan untuk episode ini");
-            }
-        } catch (error) {
-            console.error("Failed to fetch video:", error);
-            setVideoError(error.message || "Gagal mengambil URL video");
-        } finally {
-            setVideoLoading(false);
-        }
-    };
-
+    // Fetch video URL when episode changes
     useEffect(() => {
+        const fetchVideo = async () => {
+            if (!bookId || episodes.length === 0) return;
+
+            const currentEp = episodes[currentEpisodeIndex];
+            if (!currentEp) {
+                console.error('[Player] No episode found at index:', currentEpisodeIndex);
+                return;
+            }
+
+            const episodeIndex = currentEpisodeIndex;
+            console.log(`[Player] Fetching video for episode index ${episodeIndex}`);
+            setVideoLoading(true);
+            setVideoError(null);
+
+            try {
+                // Pass episode INDEX (0-based)
+                const data = await apiService.getVideoUrl(bookId, episodeIndex);
+                console.log('[Player] API Response:', data);
+                if (data && data.videoUrl) {
+                    console.log(`[Player] Got video URL for episode ${currentEpisodeIndex + 1}`);
+                    setVideoUrl(data.videoUrl);
+                } else {
+                    setVideoError("Video tidak ditemukan untuk episode ini");
+                }
+            } catch (error) {
+                console.error("[Player] Failed to fetch video:", error);
+                setVideoError(error.message || "Gagal mengambil URL video");
+            } finally {
+                setVideoLoading(false);
+            }
+        };
+
         fetchVideo();
-    }, [bookId, currentEpisodeIndex, episodes]);
+    }, [bookId, currentEpisodeIndex, episodes, retryCounter]);
 
     // Handle HLS and Video Source
     useEffect(() => {
@@ -304,7 +312,7 @@ const PlayerPage = () => {
                                 <h3 className="text-lg font-bold mb-2">Gagal Memutar</h3>
                                 <p className="text-sm opacity-60 mb-6">{videoError}</p>
                                 <button
-                                    onClick={(e) => { e.stopPropagation(); fetchVideo(); }}
+                                    onClick={(e) => { e.stopPropagation(); setRetryCounter(c => c + 1); }}
                                     className="bg-primary px-8 py-3 rounded-full font-bold flex items-center gap-2"
                                 >
                                     <RotateCcw size={18} /> Coba Lagi

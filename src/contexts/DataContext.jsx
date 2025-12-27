@@ -33,39 +33,8 @@ export const DataProvider = ({ children }) => {
         try {
             console.log('[DataContext] Fetching home data...');
 
-            // apiService.getHome() tries HippoReels first, then falls back to scraper
-            const movies = await apiService.getHome();
-
-            let allMovies = [];
-
-            // Handle different response formats
-            if (Array.isArray(movies)) {
-                // Direct array of movies (HippoReels format after transform)
-                allMovies = movies;
-            } else if (movies?.sections || Array.isArray(movies)) {
-                // Scraper format with sections
-                const sections = movies.sections || movies;
-                const movieMap = new Map();
-
-                sections.forEach(section => {
-                    if (section.movies && Array.isArray(section.movies)) {
-                        section.movies.forEach(movie => {
-                            if (!movieMap.has(movie.id)) {
-                                movieMap.set(movie.id, {
-                                    bookId: movie.id,
-                                    bookName: movie.title,
-                                    coverWap: movie.poster,
-                                    introduction: movie.description || '',
-                                    tags: movie.genres || [],
-                                    episodeCount: movie.episodeCount
-                                });
-                            }
-                        });
-                    }
-                });
-
-                allMovies = Array.from(movieMap.values());
-            }
+            // apiService.getHome() now returns transformed array of movies
+            const allMovies = await apiService.getHome();
 
             console.log(`[DataContext] Got ${allMovies.length} movies`);
 
